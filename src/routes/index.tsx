@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, type CSSProperties } from "react";
+import { useState } from "react";
 import {
   ArrowRight,
   Star,
@@ -18,25 +18,23 @@ import {
   homeTrustHighlights,
   homeWhyChooseUs,
   homeCommitment,
-  homeSupportStats,
+  homeFeatureCards,
   images,
   siteContact,
-  aboutIntro,
 } from "@/data/site";
 import { homeServicePreviews, meetAndGreet, culturalDiversity } from "@/data/pages";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ServicePreviewCard } from "@/components/ServicePreviewCard";
 import { FormField } from "@/components/FormField";
 import { FormSuccess } from "@/components/FormSuccess";
+import { CommitmentCollage } from "@/components/CommitmentCollage";
 import {
   AnimatedHeading,
   HeroEntrance,
   HeroRevealItem,
   RevealItem,
   RevealSection,
-  useRevealVisible,
 } from "@/components/Reveal";
-import { useCountUp } from "@/hooks/use-count-up";
 import { pageMeta, seo } from "@/lib/seo";
 import { buildMailtoUrl, readFormFields, submitViaMailto } from "@/lib/form-submit";
 
@@ -50,7 +48,6 @@ function HomePage() {
     <>
       <Hero />
       <TrustStrip />
-      <StatsStrip />
       <Commitment />
       <ServicesPreview />
       <WhyChooseUs />
@@ -175,35 +172,9 @@ function TrustStrip() {
     </RevealSection>
   );
 }
-function StatValue({ value }: { value: string }) {
-  const visible = useRevealVisible();
-  const display = useCountUp(value, visible);
-  return <span className="stats-strip-value">{display}</span>;
-}
-
-function StatsStrip() {
-  return (
-    <RevealSection className="section-white section-pad-sm border-y border-border/60">
-      <div className="container-page">
-        <RevealItem delayMs={0} className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
-          <span className="section-label">What sets us apart</span>
-          <h2 className="heading-md mt-3">Support built around you</h2>
-        </RevealItem>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto text-center">
-          {homeSupportStats.map((stat, i) => (
-            <RevealItem key={stat.label} delayMs={100 + i * 100}>
-              <StatValue value={stat.value} />
-              <p className="stats-strip-label">{stat.label}</p>
-            </RevealItem>
-          ))}
-        </div>
-      </div>
-    </RevealSection>
-  );
-}
 function Commitment() {
   return (
-    <RevealSection className="section-white section-pad-sm overflow-hidden">
+    <RevealSection className="section-white section-pad overflow-hidden">
       <div
         className="reveal-blob pointer-events-none absolute -right-24 top-1/4 h-72 w-72 rounded-full bg-primary/8 blur-3xl"
         aria-hidden="true"
@@ -213,44 +184,45 @@ function Commitment() {
         style={{ animationDelay: "-4s" }}
         aria-hidden="true"
       />
-      <div className="container-page relative grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+      <div className="container-page relative grid lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-16 items-center">
         <div>
           <RevealItem delayMs={0}>
             <span className="section-label block">{homeCommitment.eyebrow}</span>
           </RevealItem>
-          <AnimatedHeading
-            text={homeCommitment.title}
-            className="heading-lg mt-3"
-          />
-          <RevealItem delayMs={200}>
-            <p className="mt-4 text-muted-foreground leading-relaxed">{aboutIntro}</p>
+          <AnimatedHeading text={homeCommitment.title} className="heading-lg mt-3" />
+          <RevealItem delayMs={150}>
+            <p className="mt-4 text-base font-medium text-deep/90 leading-relaxed">
+              {homeCommitment.tagline}
+            </p>
           </RevealItem>
-          <RevealItem delayMs={320}>
-            <p className="mt-3 text-muted-foreground leading-relaxed">{homeCommitment.body}</p>
-          </RevealItem>
-          <RevealItem delayMs={440}>
-            <Link
-              to="/about-us"
-              className="mt-6 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all"
-            >
-              Learn more about us <ArrowRight className="size-4" />
+          <ul className="mt-8 space-y-5">
+            {homeFeatureCards.map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <RevealItem key={item.title} delayMs={200 + index * 100}>
+                  <li className="flex gap-4">
+                    <div className="commitment-feature-icon shrink-0" aria-hidden="true">
+                      <Icon className="size-5" />
+                    </div>
+                    <div>
+                      <h3 className="font-display text-base font-semibold text-deep">{item.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground leading-relaxed">{item.body}</p>
+                    </div>
+                  </li>
+                </RevealItem>
+              );
+            })}
+          </ul>
+          <RevealItem delayMs={650}>
+            <Link to="/forms" className="btn-primary mt-8 w-full sm:w-auto">
+              Make a Referral <ArrowRight className="size-4" />
             </Link>
           </RevealItem>
         </div>
-        <ul className="grid sm:grid-cols-2 gap-4">
-          {homeCommitment.points.map((point, index) => (
-            <li
-              key={point}
-              className="reveal-float-card"
-              style={{ "--reveal-delay": `${index * 100}ms` } as CSSProperties}
-            >
-              <div className="reveal-float-inner card-elevated p-5 h-full transition-shadow hover:shadow-[0_20px_50px_-24px_rgb(18_50_74/22%)]">
-                <CheckCircle2 className="size-5 text-primary" aria-hidden="true" />
-                <p className="mt-3 text-sm font-medium text-deep">{point}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
+
+        <RevealItem delayMs={250} className="w-full">
+          <CommitmentCollage />
+        </RevealItem>
       </div>
     </RevealSection>
   );

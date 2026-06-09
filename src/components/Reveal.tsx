@@ -74,7 +74,7 @@ export function AnimatedHeading({
           className="reveal-word"
           style={visible ? { animationDelay: `${0.1 + index * wordDelay}s` } : undefined}
         >
-          {word}{" "}
+          {word}
         </span>
       ))}
     </Tag>

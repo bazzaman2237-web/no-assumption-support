@@ -46,6 +46,9 @@ export const images = {
   hero: "/images/hero.jpg",
   about: "/images/about.jpg",
   cta: "/images/cta.jpg",
+  commitmentMain: "/images/about.jpg",
+  commitmentOverlay: "/images/service-community.webp",
+  commitmentOverlayCaption: "Person-centred care",
   favicon: "/images/favicon.png",
   australiaFlag: "/images/australia-flag.svg",
   aboriginalFlag: "/images/aboriginal-flag.svg",
@@ -149,9 +152,9 @@ export const homeFeatureCards = [
   },
 ];
 
-export const homeSupportStats = [
+/** Hero floating stats box — three headline figures (Paramount-style). */
+export const homeApartStats = [
   { value: "7 Days", label: "Flexible support availability" },
-  { value: "Perth metro", label: "Service coverage area" },
   { value: "100%", label: "Person-centred approach" },
   { value: "1:1", label: "Support matched to you" },
 ];
@@ -175,6 +178,7 @@ export const homeWhyChooseUs = [
 export const homeCommitment = {
   eyebrow: "Our Commitment",
   title: "Your life, your choices — we're here to support both.",
+  tagline: "That's a commitment we stand behind every day.",
   body: "We believe every participant deserves support that honours who they are — not who others assume them to be. We listen first, respect your choices, and deliver care with confidence and connection.",
   points: [
     "Never assume — always ask first",
