@@ -204,7 +204,19 @@ export const founderBio =
   "I am a mother and proud grandmother who has lived in Western Australia for over two decades. I am an experienced disability support worker with more than 10 years of experience supporting NDIS participants, including both adults and children with diverse needs across a broad range of disabilities, including psychosocial disabilities. My experience as a foster carer has strongly shaped my approach to support, deepening my understanding of trauma-informed care, compassionate practice, and the importance of creating safe, nurturing environments where individuals feel valued, heard, and supported to thrive. I am genuinely passionate about the work I do and take pride in delivering tailored, person-centred NDIS supports that respect each individual's goals, strengths, culture, and independence. I look forward to meeting you and your family, and supporting you on your NDIS journey.";
 
 export const teamMembers = [
-  { name: "Jennifer G. Pratt", role: "Founder & Director" },
-  { name: "George Garley", role: "Manager" },
-  { name: "Lisa Gullo", role: "Support Co-ordinator" },
+  {
+    name: "Jennifer G. Pratt",
+    role: "Founder & Director",
+    image: "/images/team/team-jennifer-pratt.png",
+  },
+  {
+    name: "George Garley",
+    role: "Manager",
+    image: "/images/team/team-george-garley.jpg",
+  },
+  {
+    name: "Lisa Gullo",
+    role: "Support Co-ordinator",
+    image: "/images/team/team-lisa-gullo.png",
+  },
 ] as const;

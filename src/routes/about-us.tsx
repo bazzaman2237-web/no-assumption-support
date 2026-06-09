@@ -87,11 +87,23 @@ function AboutPage() {
               their unique expertise and enthusiasm to our business.
             </p>
           </div>
-          <ul className="mt-10 grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+          <ul className="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-5xl mx-auto">
             {teamMembers.map((member) => (
-              <li key={member.name} className="card-elevated rounded-3xl p-6 text-center">
-                <h3 className="font-display text-lg font-semibold text-deep">{member.name}</h3>
-                <p className="mt-2 text-sm text-primary font-medium">{member.role}</p>
+              <li key={member.name} className="card-elevated rounded-3xl overflow-hidden text-center">
+                <div className="aspect-square bg-warm p-4 sm:p-5">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    width={400}
+                    height={400}
+                    loading="lazy"
+                    className="size-full rounded-2xl object-contain"
+                  />
+                </div>
+                <div className="px-5 py-5 sm:px-6 sm:py-6">
+                  <h3 className="font-display text-lg font-semibold text-deep">{member.name}</h3>
+                  <p className="mt-2 text-sm text-primary font-medium">{member.role}</p>
+                </div>
               </li>
             ))}
           </ul>
