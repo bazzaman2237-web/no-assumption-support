@@ -1,43 +1,60 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
-import { Plus, Minus } from "lucide-react";
-import { PageHero } from "./about";
+import { PageHero } from "@/components/PageHero";
+import { FaqAccordion } from "@/components/FaqAccordion";
+import { siteContact, serviceArea } from "@/data/site";
+import { pageMeta, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/faqs")({
-  head: () => ({
-    meta: [
-      { title: "FAQs | No Assumption Support Service" },
-      {
-        name: "description",
-        content:
-          "Answers to common questions about NDIS support, eligibility, plans, and working with No Assumption Support Service in Perth.",
-      },
-      { property: "og:title", content: "FAQs | No Assumption Support Service" },
-      {
-        property: "og:description",
-        content: "Common questions about our NDIS services in Perth, answered plainly.",
-      },
-    ],
-  }),
+  head: () => pageMeta(seo.faqs),
   component: FaqsPage,
 });
 
+const suburbList = [...serviceArea.serviceSuburbs, "and surrounds"].join(", ");
+
 const faqs = [
   {
-    q: "Are you a registered NDIS provider?",
-    a: "Yes. No Assumption Support Service is a fully NDIS-registered provider, which means we meet the NDIS Quality and Safeguards Commission's standards and can support participants across all plan-management types.",
+    q: "What is your NDIS registration status?",
+    a: `Our NDIS registration is currently in progress with the NDIS Quality and Safeguards Commission. We welcome enquiries and can discuss support options while registration is being finalised. Call us on ${siteContact.phone} to learn more.`,
   },
   {
     q: "Which suburbs do you service?",
-    a: "We're based in Forrestfield and service participants across the Perth metropolitan area, including Kalamunda, High Wycombe, Maida Vale, Midland, Cannington, Belmont, and surrounds. Get in touch if you're unsure — we'll let you know honestly.",
+    a: `We're based in ${serviceArea.suburb} and support participants across the ${serviceArea.metro}, including ${suburbList}. Get in touch if you're unsure — we'll let you know honestly.`,
   },
   {
-    q: "How do we get started?",
-    a: "Call, email or WhatsApp us for a friendly, no-obligation chat. We'll talk through your goals and current plan, answer any questions, and if it feels like a fit, arrange a meet-and-greet with potential support workers.",
+    q: "What is the NDIS?",
+    a: "The National Disability Insurance Scheme (NDIS) is a government program that provides funding and support to people with permanent and significant disabilities. It helps participants access services and supports that improve independence, daily living, and community participation.",
+  },
+  {
+    q: "Who is eligible for the NDIS?",
+    a: "You may be eligible if you are under 65 years of age, are an Australian citizen, permanent resident, or Protected Special Category Visa holder, and have a permanent and significant disability that affects your daily life.",
+  },
+  {
+    q: "How do I apply for the NDIS?",
+    a: "You can apply by calling the NDIS on 1800 800 110, completing an Access Request Form, asking your GP or allied health professional for supporting evidence, or getting help from a Local Area Coordinator (LAC) or support provider.",
+  },
+  {
+    q: "What supports can the NDIS fund?",
+    a: "NDIS may fund supports such as daily living assistance, community participation, personal care support, capacity building supports, therapy and allied health services, transport supports, and assistive technology and equipment. Funding depends on your individual plan and goals.",
   },
   {
     q: "Can I choose my support worker?",
-    a: "Absolutely. Choice and control are the heart of the NDIS — and the heart of how we work. We'll introduce you to options and you decide who works with you. If a match isn't right, we'll find a better one.",
+    a: "Yes. Choice and control are central to the NDIS. You have the right to choose your own registered or non-registered provider, depending on how your plan is managed. We focus on matching participants with workers who suit their personality, goals, and preferences.",
+  },
+  {
+    q: "Do I need to be NDIS-approved to contact your service?",
+    a: "No. You're welcome to contact us even if you are not yet approved for the NDIS. We can provide general information, explain how supports work, and guide you on the next steps toward accessing services.",
+  },
+  {
+    q: "Can you help me understand my NDIS plan?",
+    a: "Yes. We take the time to walk through your plan with you and explain funding categories, what supports you can use, and how your budget can best support your goals and daily needs — at a pace that suits you.",
+  },
+  {
+    q: "Do you work with self-managed and plan-managed participants?",
+    a: "Yes. We work with both self-managed and plan-managed NDIS participants. We can provide services and issue invoices in line with your plan management type, and help you understand billing and claims processing.",
+  },
+  {
+    q: "How do we get started?",
+    a: "Book your FREE 45-Minute Meet & Greet, or call, email, or WhatsApp us for a friendly, no-obligation chat. We'll talk through your goals and current plan, answer any questions, and if it feels like a fit, help you take the next step.",
   },
   {
     q: "What if my needs change?",
@@ -58,7 +75,6 @@ const faqs = [
 ];
 
 function FaqsPage() {
-  const [open, setOpen] = useState<number | null>(0);
   return (
     <>
       <PageHero
@@ -67,33 +83,10 @@ function FaqsPage() {
         subtitle="Can't find what you're after? Reach out — we love a good question."
       />
 
-      <section className="container-page py-16 md:py-24 max-w-3xl">
-        <ul className="space-y-3">
-          {faqs.map((f, i) => {
-            const isOpen = open === i;
-            return (
-              <li
-                key={f.q}
-                className="bg-card border border-border rounded-2xl overflow-hidden transition-all"
-              >
-                <button
-                  onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 p-6 text-left"
-                >
-                  <span className="font-display text-lg md:text-xl font-semibold text-deep">
-                    {f.q}
-                  </span>
-                  <span className="shrink-0 grid place-items-center size-9 rounded-full bg-secondary text-primary">
-                    {isOpen ? <Minus className="size-4" /> : <Plus className="size-4" />}
-                  </span>
-                </button>
-                {isOpen && (
-                  <div className="px-6 pb-6 text-muted-foreground leading-relaxed">{f.a}</div>
-                )}
-              </li>
-            );
-          })}
-        </ul>
+      <section className="section-white section-pad-sm">
+        <div className="container-page max-w-3xl">
+          <FaqAccordion faqs={faqs} />
+        </div>
       </section>
     </>
   );

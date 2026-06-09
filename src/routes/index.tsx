@@ -1,226 +1,198 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
-  CheckCircle2,
-  ShieldCheck,
-  Heart,
-  MapPin,
   ArrowRight,
-  Quote,
   Star,
-  Sparkles,
+  CheckCircle2,
+  Phone,
+  Mail,
+  MapPin,
+  Send,
+  HeartHandshake,
+  UserCheck,
+  ShieldCheck,
+  Clock,
+  Users,
 } from "lucide-react";
-import heroImg from "@/assets/hero.jpg";
-import aboutImg from "@/assets/about.jpg";
-import ctaImg from "@/assets/cta.jpg";
-import { services, whyChooseUs, testimonials } from "@/data/site";
+import {
+  homeTrustHighlights,
+  homeWhyChooseUs,
+  homeCommitment,
+  images,
+  siteContact,
+  aboutIntro,
+} from "@/data/site";
+import { homeServicePreviews, meetAndGreet, culturalDiversity } from "@/data/pages";
+import { SectionHeader } from "@/components/SectionHeader";
+import { ServicePreviewCard } from "@/components/ServicePreviewCard";
+import { FormField } from "@/components/FormField";
+import { FormSuccess } from "@/components/FormSuccess";
+import { pageMeta, seo } from "@/lib/seo";
+import { buildMailtoUrl, readFormFields, submitViaMailto } from "@/lib/form-submit";
 
 export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "No Assumption Support Service | NDIS Provider in Forrestfield, Perth" },
-      {
-        name: "description",
-        content:
-          "Person-centred NDIS support in Perth. We listen first and never assume — Support Without Assumptions, delivered with warmth and professionalism.",
-      },
-      { property: "og:title", content: "No Assumption Support Service | NDIS Perth" },
-      {
-        property: "og:description",
-        content: "Support Without Assumptions. Person-centred NDIS care across Perth.",
-      },
-    ],
-  }),
+  head: () => pageMeta(seo.home),
   component: HomePage,
 });
+
+const trustIcons = [UserCheck, ShieldCheck, Clock, Users];
 
 function HomePage() {
   return (
     <>
       <Hero />
-      <TrustBar />
-      <AboutIntro />
-      <ServicesGrid />
+      <TrustStrip />
+      <Commitment />
+      <ServicesPreview />
       <WhyChooseUs />
-      <Testimonials />
-      <CtaBanner />
+      <MeetAndGreetCta />
+      <CulturalTeaser />
+      <FormsCta />
+      <ContactSection />
     </>
   );
 }
 
 function Hero() {
   return (
-    <section className="relative overflow-hidden">
-      <div className="absolute inset-0 -z-10 bg-gradient-to-br from-secondary via-background to-warm" />
-      <div className="absolute -top-24 -right-24 w-[480px] h-[480px] rounded-full bg-primary/15 blur-3xl -z-10" />
-      <div className="absolute -bottom-32 -left-24 w-[420px] h-[420px] rounded-full bg-accent/30 blur-3xl -z-10" />
-
-      <div className="container-page grid lg:grid-cols-2 gap-12 lg:gap-16 items-center py-16 md:py-24">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 text-primary px-4 py-1.5 text-xs font-semibold uppercase tracking-widest">
-            <Sparkles className="size-3.5" /> NDIS Registered · Perth WA
-          </span>
-          <h1 className="mt-5 font-display text-5xl md:text-6xl lg:text-7xl font-semibold text-deep leading-[1.02]">
-            Support Without <span className="italic text-primary">Assumptions</span>.
-          </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl leading-relaxed">
-            We never assume what you need — we ask. From day one, our person-centred NDIS support is
-            shaped by your goals, your routines, and your voice.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link to="/contact" className="btn-primary">
-              Book Consultation <ArrowRight className="size-4" />
-            </Link>
-            <Link to="/about" className="btn-outline">
-              Learn More
-            </Link>
-          </div>
-          <div className="mt-8 flex items-center gap-3 text-sm text-muted-foreground">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="size-4 fill-accent text-accent" />
-              ))}
-            </div>
-            <span>Trusted by families across Perth</span>
-          </div>
-        </div>
-
-        <div className="relative">
-          <div className="relative rounded-[2rem] overflow-hidden shadow-2xl shadow-primary/20 ring-1 ring-primary/10">
-            <img
-              src={heroImg}
-              alt="Support worker walking with a participant in a Perth park"
-              width={1280}
-              height={1280}
-              className="w-full h-[420px] md:h-[540px] object-cover"
-            />
-          </div>
-          <div className="absolute -bottom-6 -left-4 md:-left-10 bg-card rounded-2xl shadow-xl p-5 flex items-center gap-4 border border-border max-w-[280px]">
-            <div className="grid place-items-center size-12 rounded-full bg-primary text-primary-foreground">
-              <Heart className="size-5" />
-            </div>
-            <div>
-              <p className="font-display font-semibold text-deep text-lg leading-tight">
-                You lead
-              </p>
-              <p className="text-xs text-muted-foreground">We listen, then act.</p>
-            </div>
-          </div>
-          <div className="hidden md:flex absolute -top-4 -right-4 bg-accent text-accent-foreground rounded-2xl shadow-xl px-5 py-3 items-center gap-2 font-semibold">
-            <ShieldCheck className="size-5" /> NDIS Registered
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-function TrustBar() {
-  const items = [
-    { icon: Heart, label: "Person-Centred Care", sub: "You lead every plan" },
-    { icon: ShieldCheck, label: "NDIS Registered Provider", sub: "Quality & compliance" },
-    { icon: MapPin, label: "Perth Based", sub: "Forrestfield, WA 6058" },
-  ];
-  return (
-    <section className="container-page -mt-2 md:-mt-8 relative z-10">
-      <div className="grid md:grid-cols-3 gap-4 bg-card rounded-3xl shadow-xl border border-border p-6 md:p-8">
-        {items.map((it) => (
-          <div key={it.label} className="flex items-center gap-4">
-            <div className="grid place-items-center size-14 rounded-2xl bg-secondary text-primary shrink-0">
-              <it.icon className="size-6" />
-            </div>
-            <div>
-              <p className="font-display font-semibold text-deep">{it.label}</p>
-              <p className="text-sm text-muted-foreground">{it.sub}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function AboutIntro() {
-  return (
-    <section className="container-page py-20 md:py-28 grid lg:grid-cols-2 gap-14 items-center">
-      <div className="relative">
-        <img
-          src={aboutImg}
-          alt="Support worker laughing with a participant at home"
-          loading="lazy"
-          width={1024}
-          height={1024}
-          className="rounded-[2rem] w-full h-[440px] object-cover shadow-xl"
-        />
-        <div className="absolute bottom-5 right-5 bg-primary text-primary-foreground rounded-2xl p-5 max-w-[220px] shadow-xl">
-          <p className="font-display text-3xl font-semibold">100%</p>
-          <p className="text-xs uppercase tracking-widest opacity-90">
-            Plans shaped by participants
-          </p>
-        </div>
-      </div>
-      <div>
-        <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-          Our Philosophy
-        </span>
-        <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-deep leading-tight">
-          We don't assume. <br />
-          <span className="italic">We ask.</span>
-        </h2>
-        <p className="mt-6 text-muted-foreground text-lg leading-relaxed">
-          Too often, support is delivered around people instead of with them. At No Assumption
-          Support Service, every plan, every shift, every conversation starts with one simple
-          principle: <strong className="text-deep">ask before you act</strong>.
-        </p>
-        <p className="mt-4 text-muted-foreground leading-relaxed">
-          We are a locally owned, NDIS-registered provider based in Forrestfield, Perth. Our team
-          listens carefully, adapts genuinely, and supports you to live the life you choose — with
-          warmth, professionalism, and respect at every step.
-        </p>
-        <Link to="/about" className="mt-7 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all">
-          Read our story <ArrowRight className="size-4" />
-        </Link>
-      </div>
-    </section>
-  );
-}
-
-function ServicesGrid() {
-  return (
-    <section className="bg-gradient-to-b from-secondary/40 to-background py-20 md:py-28">
+    <section className="section-hero-wrap pt-6 pb-10 md:pt-8 md:pb-12">
       <div className="container-page">
-        <div className="text-center max-w-2xl mx-auto">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-            Our Services
-          </span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-deep">
-            Support that fits your life
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Six core services, infinite ways to combine them. Every plan starts with what you want
-            from your week.
-          </p>
-        </div>
+        <div className="hero-panel relative overflow-hidden px-6 py-10 md:px-10 md:py-14 lg:px-14 lg:py-16">
+          <div className="absolute -top-20 -right-16 w-72 h-72 rounded-full bg-hero-blob/80 blur-2xl pointer-events-none" />
+          <div className="absolute top-1/3 -left-16 w-64 h-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
 
-        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {services.map((s) => (
-            <div
-              key={s.slug}
-              className="group bg-card rounded-3xl p-7 border border-border hover:border-primary/40 hover:-translate-y-1 transition-all shadow-sm hover:shadow-xl hover:shadow-primary/10"
-            >
-              <div className="grid place-items-center size-14 rounded-2xl bg-gradient-to-br from-primary to-deep text-primary-foreground shadow-md">
-                <s.icon className="size-6" />
+          <div className="relative grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+            <div>
+              <h1 className="heading-xl">Support That Puts People First</h1>
+              <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
+                Respectful, person-centred NDIS support from Forrestfield across the Perth metropolitan area — helping you build
+                independence, confidence, and connection.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3">
+                <Link to="/forms" className="btn-primary">
+                  Make a Referral <ArrowRight className="size-4" />
+                </Link>
+                <Link to="/about-us" className="btn-teal">
+                  About Us
+                </Link>
               </div>
-              <h3 className="mt-5 font-display text-xl font-semibold text-deep">{s.title}</h3>
-              <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{s.short}</p>
-              <Link
-                to="/services"
-                className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:gap-2.5 transition-all"
-              >
-                Learn more <ArrowRight className="size-4" />
-              </Link>
+              <div className="mt-7 flex items-center gap-3">
+                <span className="font-display font-semibold text-deep">Trusted Care</span>
+                <div className="flex gap-0.5" aria-hidden="true">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="size-4 fill-star text-star" />
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="relative min-h-[280px] sm:min-h-[360px] lg:min-h-[420px]">
+              <div className="absolute inset-x-4 top-6 bottom-0 rounded-card overflow-hidden shadow-[0_24px_50px_-24px_rgb(18_50_74/30%)]">
+                <img
+                  src={images.hero}
+                  alt="Support worker with a participant"
+                  width={1920}
+                  height={1280}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden sm:block">
+                <div className="ndis-logo-box-float card-elevated p-4 shadow-lg">
+                  <img src={images.ndisLogo} alt="I Support the NDIS" className="h-14 w-auto" width={120} height={118} />
+                </div>
+              </div>
+              <div className="absolute right-0 bottom-6 md:bottom-10 hidden sm:block">
+                <div className="listen-first-box-float card-elevated px-4 py-3 flex items-center gap-2.5 shadow-lg max-w-[210px]">
+                  <div className="icon-badge size-9 shrink-0">
+                    <HeartHandshake className="size-4" />
+                  </div>
+                  <p className="text-sm font-semibold text-deep leading-snug">
+                    We listen first — never assume
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function TrustStrip() {
+  return (
+    <section className="section-sky section-pad-sm">
+      <div className="container-page">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {homeTrustHighlights.map((item, i) => {
+            const Icon = trustIcons[i] ?? UserCheck;
+            return (
+              <div key={item.title} className="card-elevated p-6 text-center">
+                <div className="icon-badge size-11 mx-auto">
+                  <Icon className="size-5" />
+                </div>
+                <h3 className="mt-4 font-display text-base font-semibold text-deep">{item.title}</h3>
+                <p className="mt-2 text-sm text-muted-foreground">{item.body}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Commitment() {
+  return (
+    <section className="section-white section-pad-sm">
+      <div className="container-page grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div>
+          <span className="section-label">{homeCommitment.eyebrow}</span>
+          <h2 className="heading-lg mt-3">{homeCommitment.title}</h2>
+          <p className="mt-4 text-muted-foreground leading-relaxed">{aboutIntro}</p>
+          <p className="mt-3 text-muted-foreground leading-relaxed">{homeCommitment.body}</p>
+          <Link to="/about-us" className="mt-6 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all">
+            Learn more about us <ArrowRight className="size-4" />
+          </Link>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {homeCommitment.points.map((point) => (
+            <div key={point} className="card-elevated p-5">
+              <CheckCircle2 className="size-5 text-primary" />
+              <p className="mt-3 text-sm font-medium text-deep">{point}</p>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function ServicesPreview() {
+  return (
+    <section className="section-teal section-pad-sm">
+      <div className="container-page">
+        <SectionHeader
+          label="Our Services"
+          title="Support tailored to your everyday life"
+          subtitle="Explore each service for full details — short summaries only here."
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 items-stretch">
+          {homeServicePreviews.map((s) => (
+            <ServicePreviewCard
+              key={s.to}
+              title={s.title}
+              description={s.description}
+              to={s.to}
+              image={s.image}
+              buttonLabel={s.buttonLabel}
+            />
+          ))}
+        </div>
+        <div className="mt-10 text-center">
+          <Link to="/our-services" className="btn-outline">
+            View all services
+          </Link>
         </div>
       </div>
     </section>
@@ -229,134 +201,168 @@ function ServicesGrid() {
 
 function WhyChooseUs() {
   return (
-    <section className="container-page py-20 md:py-28">
-      <div className="grid lg:grid-cols-5 gap-12 items-start">
-        <div className="lg:col-span-2 lg:sticky lg:top-28">
-          <span className="text-xs font-semibold uppercase tracking-widest text-primary">
-            Why Choose Us
-          </span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold text-deep leading-tight">
-            Care you can feel the difference in.
-          </h2>
-          <p className="mt-5 text-muted-foreground leading-relaxed">
-            Choosing a provider is a big decision. Here's what makes No Assumption Support Service
-            different — and why families across Perth stay with us.
-          </p>
-          <Link to="/contact" className="mt-7 btn-primary">
-            Talk to us <ArrowRight className="size-4" />
+    <section className="section-trust section-pad-sm">
+      <div className="container-page">
+        <SectionHeader
+          label="Why Choose Us"
+          title="Support you can trust, delivered with heart"
+          subtitle="What sets No Assumption apart for participants and families in our service area."
+          onDark
+        />
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+          {homeWhyChooseUs.map((item) => (
+            <div
+              key={item}
+              className="flex items-start gap-3 bg-white/10 backdrop-blur-sm border border-white/15 rounded-card p-5"
+            >
+              <CheckCircle2 className="size-5 text-label-on-dark shrink-0 mt-0.5" />
+              <span className="text-deep-foreground font-medium">{item}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function MeetAndGreetCta() {
+  return (
+    <section className="section-sky section-pad-sm">
+      <div className="container-page max-w-3xl">
+        <div className="hero-panel p-8 md:p-12 text-center">
+          <span className="section-label">{meetAndGreet.title}</span>
+          <h2 className="heading-lg mt-3">{meetAndGreet.heading}</h2>
+          <p className="mt-3 text-muted-foreground max-w-lg mx-auto">{meetAndGreet.teaser}</p>
+          <Link to="/meet-and-greet" className="mt-8 inline-flex btn-primary">
+            {meetAndGreet.cta} <ArrowRight className="size-4" />
           </Link>
         </div>
-        <ul className="lg:col-span-3 space-y-4">
-          {whyChooseUs.map((w, i) => (
-            <li
-              key={w.title}
-              className="flex gap-5 bg-card rounded-2xl p-6 border border-border hover:border-primary/30 transition-colors"
-            >
-              <div className="shrink-0 grid place-items-center size-12 rounded-xl bg-secondary text-primary font-display font-semibold text-lg">
-                {String(i + 1).padStart(2, "0")}
-              </div>
-              <div>
-                <h3 className="font-display text-xl font-semibold text-deep flex items-center gap-2">
-                  <CheckCircle2 className="size-5 text-primary" /> {w.title}
-                </h3>
-                <p className="mt-1.5 text-muted-foreground">{w.body}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
       </div>
     </section>
   );
 }
 
-function Testimonials() {
-  const [idx, setIdx] = useState(0);
-  useEffect(() => {
-    const t = setInterval(() => setIdx((i) => (i + 1) % testimonials.length), 6000);
-    return () => clearInterval(t);
-  }, []);
-  const t = testimonials[idx];
+function CulturalTeaser() {
   return (
-    <section className="bg-deep text-primary-foreground py-20 md:py-28 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-72 h-72 rounded-full bg-primary blur-3xl" />
-        <div className="absolute bottom-10 right-10 w-80 h-80 rounded-full bg-accent blur-3xl" />
+    <section className="section-white section-pad-sm">
+      <div className="container-page max-w-3xl text-center">
+        <span className="section-label">Inclusion</span>
+        <h2 className="heading-md mt-3">{culturalDiversity.hero.title}</h2>
+        <p className="mt-3 text-muted-foreground">{culturalDiversity.hero.teaser}</p>
+        <Link to="/cultural-diversity" className="mt-6 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all">
+          Learn More <ArrowRight className="size-4" />
+        </Link>
       </div>
-      <div className="container-page relative">
-        <div className="max-w-3xl mx-auto text-center">
-          <span className="text-xs font-semibold uppercase tracking-widest opacity-70">
-            Kind Words
-          </span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl font-semibold">
-            From the families we walk beside.
-          </h2>
+    </section>
+  );
+}
+
+function FormsCta() {
+  return (
+    <section className="section-teal section-pad-sm">
+      <div className="container-page">
+        <SectionHeader
+          title="Get in touch your way"
+          subtitle="Referrals, careers, and feedback — we're here to listen."
+        />
+        <div className="flex flex-wrap justify-center gap-4">
+          <Link to="/forms" className="btn-primary">
+            Make a Referral <ArrowRight className="size-4" />
+          </Link>
+          <Link to="/forms" search={{ tab: "career" }} className="btn-teal">
+            Careers
+          </Link>
+          <a href={`mailto:${siteContact.feedbackEmail}`} className="btn-outline">
+            Feedback & Complaints
+          </a>
         </div>
-        <div className="mt-14 max-w-3xl mx-auto">
-          <Quote className="size-12 text-accent mx-auto" />
-          <blockquote className="mt-6 text-center font-display text-2xl md:text-3xl leading-relaxed min-h-[140px]">
-            "{t.quote}"
-          </blockquote>
-          <div className="mt-8 text-center">
-            <p className="font-semibold">{t.name}</p>
-            <p className="text-sm opacity-70">{t.role}</p>
-          </div>
-          <div className="mt-8 flex justify-center gap-2">
-            {testimonials.map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIdx(i)}
-                aria-label={`Testimonial ${i + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  i === idx ? "w-10 bg-accent" : "w-2 bg-primary-foreground/30"
-                }`}
-              />
+      </div>
+    </section>
+  );
+}
+
+function ContactSection() {
+  const [sent, setSent] = useState(false);
+
+  return (
+    <section id="contact" className="section-white section-pad-sm">
+      <div className="container-page">
+        <SectionHeader
+          label="Contact Us"
+          title="We'd love to hear from you"
+          subtitle="Reach out by phone, email, or the form below. We respond within one business day."
+        />
+
+        <div className="grid lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
+          <div className="lg:col-span-2 space-y-3">
+            {[
+              { icon: Phone, label: "Phone", value: siteContact.phone, href: siteContact.phoneHref },
+              { icon: Mail, label: "Email", value: siteContact.email, href: `mailto:${siteContact.email}` },
+              { icon: MapPin, label: "Location", value: siteContact.address, href: siteContact.mapsHref },
+            ].map((c) => (
+              <a
+                key={c.label}
+                href={c.href}
+                target={c.href.startsWith("http") ? "_blank" : undefined}
+                rel="noreferrer"
+                className="flex items-center gap-4 card-elevated p-5 hover:-translate-y-0.5 transition-transform"
+              >
+                <div className="icon-badge size-11 shrink-0">
+                  <c.icon className="size-5" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{c.label}</p>
+                  <p className="font-semibold text-deep">{c.value}</p>
+                </div>
+              </a>
             ))}
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
-function CtaBanner() {
-  return (
-    <section className="container-page py-20">
-      <div className="relative rounded-[2.5rem] overflow-hidden">
-        <img
-          src={ctaImg}
-          alt="Community participants smiling together"
-          loading="lazy"
-          width={1600}
-          height={900}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-deep/95 via-deep/80 to-primary/70" />
-        <div className="relative px-8 md:px-16 py-16 md:py-24 text-primary-foreground max-w-3xl">
-          <span className="text-xs font-semibold uppercase tracking-widest opacity-80">
-            Get Started
-          </span>
-          <h2 className="mt-3 font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-tight">
-            Take the first step.
-          </h2>
-          <p className="mt-5 text-lg opacity-90 max-w-xl">
-            A friendly chat, no obligation. Tell us what matters to you and we'll build a support
-            plan around it — never the other way around.
-          </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-7 py-3.5 font-semibold hover:bg-accent/90 transition-colors shadow-lg"
-            >
-              Book Now <ArrowRight className="size-4" />
-            </Link>
-            <a
-              href="https://wa.me/61468880557"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-2 rounded-full border border-primary-foreground/40 px-7 py-3.5 font-semibold hover:bg-primary-foreground/10 transition-colors"
-            >
-              WhatsApp us
-            </a>
+          <div className="lg:col-span-3 card-elevated p-7 md:p-8">
+            {sent ? (
+              <FormSuccess
+                message="Your email app should open with your enquiry ready to send. We'll respond within one business day once received."
+                fallbackEmail={siteContact.email}
+              />
+            ) : (
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  const { get } = readFormFields(e.currentTarget);
+                  submitViaMailto(
+                    buildMailtoUrl({
+                      to: siteContact.email,
+                      subject: "Homepage enquiry — No Assumption Support Service",
+                      fields: {
+                        Name: get("name"),
+                        Phone: get("phone"),
+                        Email: get("email"),
+                        Message: get("message"),
+                      },
+                    }),
+                  );
+                  setSent(true);
+                }}
+                className="space-y-4"
+              >
+                <div className="grid sm:grid-cols-2 gap-4">
+                  <FormField label="Your name" name="name" required placeholder="Your full name" />
+                  <FormField label="Phone" name="phone" type="tel" required placeholder="Your phone number" />
+                </div>
+                <FormField label="Email" name="email" type="email" required placeholder="you@example.com" />
+                <FormField
+                  label="How can we help?"
+                  name="message"
+                  as="textarea"
+                  rows={4}
+                  required
+                  placeholder="Tell us how we can support you..."
+                />
+                <button type="submit" className="btn-primary w-full sm:w-auto">
+                  <Send className="size-4" /> Submit enquiry
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>

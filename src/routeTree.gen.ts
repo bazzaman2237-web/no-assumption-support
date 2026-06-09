@@ -9,14 +9,37 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SupportCoordinationRouteImport } from './routes/support-coordination'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as ServicesRouteImport } from './routes/services'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as PositiveBehaviourSupportRouteImport } from './routes/positive-behaviour-support'
+import { Route as PersonalCareAndTransitionsRouteImport } from './routes/personal-care-and-transitions'
+import { Route as OurServicesRouteImport } from './routes/our-services'
+import { Route as NdisSupportsRouteImport } from './routes/ndis-supports'
 import { Route as NdisResourcesRouteImport } from './routes/ndis-resources'
+import { Route as NdisQualityAndSafeguardsCommissionRouteImport } from './routes/ndis-quality-and-safeguards-commission'
+import { Route as NdisFundingRouteImport } from './routes/ndis-funding'
+import { Route as MeetAndGreetRouteImport } from './routes/meet-and-greet'
+import { Route as GuidanceRouteImport } from './routes/guidance'
+import { Route as FormsRouteImport } from './routes/forms'
 import { Route as FaqsRouteImport } from './routes/faqs'
+import { Route as DailyLivingSupportRouteImport } from './routes/daily-living-support'
+import { Route as CulturalDiversityRouteImport } from './routes/cultural-diversity'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ConsentRouteImport } from './routes/consent'
+import { Route as CommunityGetTogetherRouteImport } from './routes/community-get-together'
+import { Route as CollaborationRouteImport } from './routes/collaboration'
+import { Route as AccommodationSupportsRouteImport } from './routes/accommodation-supports'
+import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
+const SupportCoordinationRoute = SupportCoordinationRouteImport.update({
+  id: '/support-coordination',
+  path: '/support-coordination',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
@@ -27,9 +50,62 @@ const ServicesRoute = ServicesRouteImport.update({
   path: '/services',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PositiveBehaviourSupportRoute =
+  PositiveBehaviourSupportRouteImport.update({
+    id: '/positive-behaviour-support',
+    path: '/positive-behaviour-support',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const PersonalCareAndTransitionsRoute =
+  PersonalCareAndTransitionsRouteImport.update({
+    id: '/personal-care-and-transitions',
+    path: '/personal-care-and-transitions',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const OurServicesRoute = OurServicesRouteImport.update({
+  id: '/our-services',
+  path: '/our-services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NdisSupportsRoute = NdisSupportsRouteImport.update({
+  id: '/ndis-supports',
+  path: '/ndis-supports',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const NdisResourcesRoute = NdisResourcesRouteImport.update({
   id: '/ndis-resources',
   path: '/ndis-resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NdisQualityAndSafeguardsCommissionRoute =
+  NdisQualityAndSafeguardsCommissionRouteImport.update({
+    id: '/ndis-quality-and-safeguards-commission',
+    path: '/ndis-quality-and-safeguards-commission',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const NdisFundingRoute = NdisFundingRouteImport.update({
+  id: '/ndis-funding',
+  path: '/ndis-funding',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MeetAndGreetRoute = MeetAndGreetRouteImport.update({
+  id: '/meet-and-greet',
+  path: '/meet-and-greet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidanceRoute = GuidanceRouteImport.update({
+  id: '/guidance',
+  path: '/guidance',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormsRoute = FormsRouteImport.update({
+  id: '/forms',
+  path: '/forms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FaqsRoute = FaqsRouteImport.update({
@@ -37,9 +113,44 @@ const FaqsRoute = FaqsRouteImport.update({
   path: '/faqs',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DailyLivingSupportRoute = DailyLivingSupportRouteImport.update({
+  id: '/daily-living-support',
+  path: '/daily-living-support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CulturalDiversityRoute = CulturalDiversityRouteImport.update({
+  id: '/cultural-diversity',
+  path: '/cultural-diversity',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConsentRoute = ConsentRouteImport.update({
+  id: '/consent',
+  path: '/consent',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommunityGetTogetherRoute = CommunityGetTogetherRouteImport.update({
+  id: '/community-get-together',
+  path: '/community-get-together',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CollaborationRoute = CollaborationRouteImport.update({
+  id: '/collaboration',
+  path: '/collaboration',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AccommodationSupportsRoute = AccommodationSupportsRouteImport.update({
+  id: '/accommodation-supports',
+  path: '/accommodation-supports',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutUsRoute = AboutUsRouteImport.update({
+  id: '/about-us',
+  path: '/about-us',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -56,73 +167,206 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/about-us': typeof AboutUsRoute
+  '/accommodation-supports': typeof AccommodationSupportsRoute
+  '/collaboration': typeof CollaborationRoute
+  '/community-get-together': typeof CommunityGetTogetherRoute
+  '/consent': typeof ConsentRoute
   '/contact': typeof ContactRoute
+  '/cultural-diversity': typeof CulturalDiversityRoute
+  '/daily-living-support': typeof DailyLivingSupportRoute
   '/faqs': typeof FaqsRoute
+  '/forms': typeof FormsRoute
+  '/guidance': typeof GuidanceRoute
+  '/meet-and-greet': typeof MeetAndGreetRoute
+  '/ndis-funding': typeof NdisFundingRoute
+  '/ndis-quality-and-safeguards-commission': typeof NdisQualityAndSafeguardsCommissionRoute
   '/ndis-resources': typeof NdisResourcesRoute
+  '/ndis-supports': typeof NdisSupportsRoute
+  '/our-services': typeof OurServicesRoute
+  '/personal-care-and-transitions': typeof PersonalCareAndTransitionsRoute
+  '/positive-behaviour-support': typeof PositiveBehaviourSupportRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support-coordination': typeof SupportCoordinationRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/about-us': typeof AboutUsRoute
+  '/accommodation-supports': typeof AccommodationSupportsRoute
+  '/collaboration': typeof CollaborationRoute
+  '/community-get-together': typeof CommunityGetTogetherRoute
+  '/consent': typeof ConsentRoute
   '/contact': typeof ContactRoute
+  '/cultural-diversity': typeof CulturalDiversityRoute
+  '/daily-living-support': typeof DailyLivingSupportRoute
   '/faqs': typeof FaqsRoute
+  '/forms': typeof FormsRoute
+  '/guidance': typeof GuidanceRoute
+  '/meet-and-greet': typeof MeetAndGreetRoute
+  '/ndis-funding': typeof NdisFundingRoute
+  '/ndis-quality-and-safeguards-commission': typeof NdisQualityAndSafeguardsCommissionRoute
   '/ndis-resources': typeof NdisResourcesRoute
+  '/ndis-supports': typeof NdisSupportsRoute
+  '/our-services': typeof OurServicesRoute
+  '/personal-care-and-transitions': typeof PersonalCareAndTransitionsRoute
+  '/positive-behaviour-support': typeof PositiveBehaviourSupportRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support-coordination': typeof SupportCoordinationRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/about-us': typeof AboutUsRoute
+  '/accommodation-supports': typeof AccommodationSupportsRoute
+  '/collaboration': typeof CollaborationRoute
+  '/community-get-together': typeof CommunityGetTogetherRoute
+  '/consent': typeof ConsentRoute
   '/contact': typeof ContactRoute
+  '/cultural-diversity': typeof CulturalDiversityRoute
+  '/daily-living-support': typeof DailyLivingSupportRoute
   '/faqs': typeof FaqsRoute
+  '/forms': typeof FormsRoute
+  '/guidance': typeof GuidanceRoute
+  '/meet-and-greet': typeof MeetAndGreetRoute
+  '/ndis-funding': typeof NdisFundingRoute
+  '/ndis-quality-and-safeguards-commission': typeof NdisQualityAndSafeguardsCommissionRoute
   '/ndis-resources': typeof NdisResourcesRoute
+  '/ndis-supports': typeof NdisSupportsRoute
+  '/our-services': typeof OurServicesRoute
+  '/personal-care-and-transitions': typeof PersonalCareAndTransitionsRoute
+  '/positive-behaviour-support': typeof PositiveBehaviourSupportRoute
+  '/robots.txt': typeof RobotsDottxtRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/support-coordination': typeof SupportCoordinationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
     | '/about'
+    | '/about-us'
+    | '/accommodation-supports'
+    | '/collaboration'
+    | '/community-get-together'
+    | '/consent'
     | '/contact'
+    | '/cultural-diversity'
+    | '/daily-living-support'
     | '/faqs'
+    | '/forms'
+    | '/guidance'
+    | '/meet-and-greet'
+    | '/ndis-funding'
+    | '/ndis-quality-and-safeguards-commission'
     | '/ndis-resources'
+    | '/ndis-supports'
+    | '/our-services'
+    | '/personal-care-and-transitions'
+    | '/positive-behaviour-support'
+    | '/robots.txt'
     | '/services'
     | '/sitemap.xml'
+    | '/support-coordination'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
+    | '/about-us'
+    | '/accommodation-supports'
+    | '/collaboration'
+    | '/community-get-together'
+    | '/consent'
     | '/contact'
+    | '/cultural-diversity'
+    | '/daily-living-support'
     | '/faqs'
+    | '/forms'
+    | '/guidance'
+    | '/meet-and-greet'
+    | '/ndis-funding'
+    | '/ndis-quality-and-safeguards-commission'
     | '/ndis-resources'
+    | '/ndis-supports'
+    | '/our-services'
+    | '/personal-care-and-transitions'
+    | '/positive-behaviour-support'
+    | '/robots.txt'
     | '/services'
     | '/sitemap.xml'
+    | '/support-coordination'
   id:
     | '__root__'
     | '/'
     | '/about'
+    | '/about-us'
+    | '/accommodation-supports'
+    | '/collaboration'
+    | '/community-get-together'
+    | '/consent'
     | '/contact'
+    | '/cultural-diversity'
+    | '/daily-living-support'
     | '/faqs'
+    | '/forms'
+    | '/guidance'
+    | '/meet-and-greet'
+    | '/ndis-funding'
+    | '/ndis-quality-and-safeguards-commission'
     | '/ndis-resources'
+    | '/ndis-supports'
+    | '/our-services'
+    | '/personal-care-and-transitions'
+    | '/positive-behaviour-support'
+    | '/robots.txt'
     | '/services'
     | '/sitemap.xml'
+    | '/support-coordination'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AboutUsRoute: typeof AboutUsRoute
+  AccommodationSupportsRoute: typeof AccommodationSupportsRoute
+  CollaborationRoute: typeof CollaborationRoute
+  CommunityGetTogetherRoute: typeof CommunityGetTogetherRoute
+  ConsentRoute: typeof ConsentRoute
   ContactRoute: typeof ContactRoute
+  CulturalDiversityRoute: typeof CulturalDiversityRoute
+  DailyLivingSupportRoute: typeof DailyLivingSupportRoute
   FaqsRoute: typeof FaqsRoute
+  FormsRoute: typeof FormsRoute
+  GuidanceRoute: typeof GuidanceRoute
+  MeetAndGreetRoute: typeof MeetAndGreetRoute
+  NdisFundingRoute: typeof NdisFundingRoute
+  NdisQualityAndSafeguardsCommissionRoute: typeof NdisQualityAndSafeguardsCommissionRoute
   NdisResourcesRoute: typeof NdisResourcesRoute
+  NdisSupportsRoute: typeof NdisSupportsRoute
+  OurServicesRoute: typeof OurServicesRoute
+  PersonalCareAndTransitionsRoute: typeof PersonalCareAndTransitionsRoute
+  PositiveBehaviourSupportRoute: typeof PositiveBehaviourSupportRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SupportCoordinationRoute: typeof SupportCoordinationRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/support-coordination': {
+      id: '/support-coordination'
+      path: '/support-coordination'
+      fullPath: '/support-coordination'
+      preLoaderRoute: typeof SupportCoordinationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
@@ -137,11 +381,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/positive-behaviour-support': {
+      id: '/positive-behaviour-support'
+      path: '/positive-behaviour-support'
+      fullPath: '/positive-behaviour-support'
+      preLoaderRoute: typeof PositiveBehaviourSupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/personal-care-and-transitions': {
+      id: '/personal-care-and-transitions'
+      path: '/personal-care-and-transitions'
+      fullPath: '/personal-care-and-transitions'
+      preLoaderRoute: typeof PersonalCareAndTransitionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-services': {
+      id: '/our-services'
+      path: '/our-services'
+      fullPath: '/our-services'
+      preLoaderRoute: typeof OurServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ndis-supports': {
+      id: '/ndis-supports'
+      path: '/ndis-supports'
+      fullPath: '/ndis-supports'
+      preLoaderRoute: typeof NdisSupportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ndis-resources': {
       id: '/ndis-resources'
       path: '/ndis-resources'
       fullPath: '/ndis-resources'
       preLoaderRoute: typeof NdisResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ndis-quality-and-safeguards-commission': {
+      id: '/ndis-quality-and-safeguards-commission'
+      path: '/ndis-quality-and-safeguards-commission'
+      fullPath: '/ndis-quality-and-safeguards-commission'
+      preLoaderRoute: typeof NdisQualityAndSafeguardsCommissionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ndis-funding': {
+      id: '/ndis-funding'
+      path: '/ndis-funding'
+      fullPath: '/ndis-funding'
+      preLoaderRoute: typeof NdisFundingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/meet-and-greet': {
+      id: '/meet-and-greet'
+      path: '/meet-and-greet'
+      fullPath: '/meet-and-greet'
+      preLoaderRoute: typeof MeetAndGreetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guidance': {
+      id: '/guidance'
+      path: '/guidance'
+      fullPath: '/guidance'
+      preLoaderRoute: typeof GuidanceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forms': {
+      id: '/forms'
+      path: '/forms'
+      fullPath: '/forms'
+      preLoaderRoute: typeof FormsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/faqs': {
@@ -151,11 +465,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/daily-living-support': {
+      id: '/daily-living-support'
+      path: '/daily-living-support'
+      fullPath: '/daily-living-support'
+      preLoaderRoute: typeof DailyLivingSupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cultural-diversity': {
+      id: '/cultural-diversity'
+      path: '/cultural-diversity'
+      fullPath: '/cultural-diversity'
+      preLoaderRoute: typeof CulturalDiversityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/consent': {
+      id: '/consent'
+      path: '/consent'
+      fullPath: '/consent'
+      preLoaderRoute: typeof ConsentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/community-get-together': {
+      id: '/community-get-together'
+      path: '/community-get-together'
+      fullPath: '/community-get-together'
+      preLoaderRoute: typeof CommunityGetTogetherRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/collaboration': {
+      id: '/collaboration'
+      path: '/collaboration'
+      fullPath: '/collaboration'
+      preLoaderRoute: typeof CollaborationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/accommodation-supports': {
+      id: '/accommodation-supports'
+      path: '/accommodation-supports'
+      fullPath: '/accommodation-supports'
+      preLoaderRoute: typeof AccommodationSupportsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about-us': {
+      id: '/about-us'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof AboutUsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -178,12 +541,41 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AboutUsRoute: AboutUsRoute,
+  AccommodationSupportsRoute: AccommodationSupportsRoute,
+  CollaborationRoute: CollaborationRoute,
+  CommunityGetTogetherRoute: CommunityGetTogetherRoute,
+  ConsentRoute: ConsentRoute,
   ContactRoute: ContactRoute,
+  CulturalDiversityRoute: CulturalDiversityRoute,
+  DailyLivingSupportRoute: DailyLivingSupportRoute,
   FaqsRoute: FaqsRoute,
+  FormsRoute: FormsRoute,
+  GuidanceRoute: GuidanceRoute,
+  MeetAndGreetRoute: MeetAndGreetRoute,
+  NdisFundingRoute: NdisFundingRoute,
+  NdisQualityAndSafeguardsCommissionRoute:
+    NdisQualityAndSafeguardsCommissionRoute,
   NdisResourcesRoute: NdisResourcesRoute,
+  NdisSupportsRoute: NdisSupportsRoute,
+  OurServicesRoute: OurServicesRoute,
+  PersonalCareAndTransitionsRoute: PersonalCareAndTransitionsRoute,
+  PositiveBehaviourSupportRoute: PositiveBehaviourSupportRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SupportCoordinationRoute: SupportCoordinationRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}

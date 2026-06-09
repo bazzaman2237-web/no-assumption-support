@@ -1,0 +1,5 @@
+# Netlify / Cloudflare Pages — 301 permanent redirects
+# Canonical URLs match the live Jimdo site (/about-us, /our-services).
+
+/about     /about-us      301
+/services  /our-services  301

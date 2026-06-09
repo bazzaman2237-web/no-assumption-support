@@ -1,118 +1,210 @@
 import {
-  ArrowRightLeft,
-  Sparkles,
-  HandHelping,
   Users,
   Home,
-  HeartPulse,
+  HandHelping,
+  Car,
+  HeartHandshake,
+  Sparkles,
+  UserCheck,
+  Heart,
+  ShieldCheck,
+  Smile,
   type LucideIcon,
 } from "lucide-react";
+
+export const siteContact = {
+  phone: "+61 468 880 557",
+  phoneHref: "tel:+61468880557",
+  email: "info@noassumption.com.au",
+  feedbackEmail: "welisten@noassumption.com.au",
+  whatsapp: "https://wa.me/61468880557",
+  address: "Forrestfield, Perth WA 6058",
+  mapsHref: "https://maps.google.com/?q=Forrestfield+WA+6058",
+  abn: "36 692 156 737",
+  ndisStatus: "Registration in progress",
+  hours: "Monday – Sunday: available by appointment",
+} as const;
+
+/** Confirmed business location — single source of truth for site copy */
+export const serviceArea = {
+  suburb: "Forrestfield",
+  metro: "Perth metropolitan area",
+  state: "Western Australia",
+  serviceSuburbs: [
+    "Kalamunda",
+    "High Wycombe",
+    "Maida Vale",
+    "Midland",
+    "Cannington",
+    "Belmont",
+  ],
+} as const;
+
+export const images = {
+  logo: "/images/logo.png",
+  ndisLogo: "/images/ndis-logo.png",
+  hero: "/images/hero.jpg",
+  about: "/images/about.jpg",
+  cta: "/images/cta.jpg",
+  favicon: "/images/favicon.png",
+  australiaFlag: "/images/australia-flag.svg",
+  aboriginalFlag: "/images/aboriginal-flag.svg",
+} as const;
+
+export const acknowledgementText =
+  "No Assumption acknowledges the Traditional Owners of the land on which we live and work. We pay our respects to Elders past, present and emerging, and recognise their continuing connection to land, waters and community.";
 
 export interface Service {
   slug: string;
   title: string;
   icon: LucideIcon;
+  image: string;
   short: string;
   long: string;
 }
 
 export const services: Service[] = [
   {
-    slug: "transition-support",
-    title: "Transition & Support",
-    icon: ArrowRightLeft,
-    short:
-      "Steady, respectful support through life transitions — from school to work, home to home, plan to plan.",
-    long:
-      "Change is rarely linear. We walk alongside you through the moves that matter — leaving school, finding work, moving house, navigating a new NDIS plan — building the routines and confidence that make each step feel less daunting.",
-  },
-  {
-    slug: "life-skills",
-    title: "Developing Life Skills",
-    icon: Sparkles,
-    short:
-      "Practical, everyday skills built at your pace — budgeting, cooking, travel, self-care, and confidence.",
-    long:
-      "We focus on the skills you choose. Cooking a favourite meal, catching public transport, managing money, looking after your wellbeing — we break the steps down, practise together, and celebrate progress along the way.",
-  },
-  {
-    slug: "personal-activities",
-    title: "Assist Personal Activities",
-    icon: HandHelping,
-    short:
-      "Discreet, dignified help with personal care — always asked first, always on your terms.",
-    long:
-      "Personal care is personal. We respect your routines, your preferences, and your privacy — supporting bathing, dressing, grooming, mobility and medication in a way that always feels like your choice.",
-  },
-  {
-    slug: "community-participation",
-    title: "Community Participation",
+    slug: "community-access",
+    title: "Community Access",
     icon: Users,
+    image: "/images/service-community.webp",
     short:
-      "Get out, get involved, get connected — sport, hobbies, classes, volunteering, friendships.",
+      "Get out, stay connected, and take part in the activities and communities that matter to you.",
     long:
-      "We help you join the activities and communities that light you up — local sport, art classes, faith groups, volunteering, or just a regular coffee catch-up. Connection is a service, not a side note.",
+      "We support you to attend events, join groups, visit local venues, and build meaningful social connections — helping you feel part of your community, not apart from it.",
   },
   {
-    slug: "daily-tasks-shared-living",
-    title: "Daily Tasks / Shared Living",
+    slug: "daily-living-support",
+    title: "Daily Living Support",
     icon: Home,
+    image: "/images/service-daily-tasks.jpg",
     short:
-      "Support in your home or a shared living arrangement — meals, cleaning, routines and harmony.",
+      "Practical help with everyday household tasks so your home runs smoothly.",
     long:
-      "Whether you live alone or with housemates, we help keep the everyday running smoothly — cooking, cleaning, shopping, scheduling — while supporting healthy household dynamics in shared living.",
+      "From meal preparation and cleaning to shopping and organising routines, we provide respectful support that keeps daily life manageable and your independence intact.",
   },
   {
-    slug: "positive-behaviour-support",
-    title: "Positive Behaviour Support",
-    icon: HeartPulse,
+    slug: "personal-care",
+    title: "Personal Care",
+    icon: HandHelping,
+    image: "/images/service-personal-activities.jpg",
     short:
-      "Strengths-based, evidence-informed strategies that improve quality of life for everyone involved.",
+      "Dignified, discreet assistance with personal care — always on your terms.",
     long:
-      "Working with you, your family and your supports, we develop positive behaviour support plans that focus on understanding, prevention, and skill-building — never punishment. The goal is a fuller, freer life.",
+      "We support bathing, dressing, grooming, mobility, and medication with sensitivity and respect. Your routines, preferences, and privacy always come first.",
+  },
+  {
+    slug: "transport-assistance",
+    title: "Transport Assistance",
+    icon: Car,
+    image: "/images/service-transition.jpg",
+    short:
+      "Safe, reliable support getting to appointments, activities, and everyday destinations.",
+    long:
+      "Whether it's a medical appointment, community activity, or social visit, we help you travel with confidence — building independence one trip at a time.",
+  },
+  {
+    slug: "respite-support",
+    title: "Respite Support",
+    icon: HeartHandshake,
+    image: "/images/service-we-listen.webp",
+    short:
+      "Short-term support that gives participants and families breathing room.",
+    long:
+      "Everyone needs a break sometimes. Our respite support provides reliable care when families or carers need time to rest, recharge, or attend to other responsibilities.",
+  },
+  {
+    slug: "life-skills-development",
+    title: "Life Skills Development",
+    icon: Sparkles,
+    image: "/images/service-life-skills.webp",
+    short:
+      "Build practical skills for greater independence at your own pace.",
+    long:
+      "Cooking, budgeting, travel, self-care, communication — we work alongside you to develop the everyday skills that build confidence and support a more independent life.",
   },
 ];
 
-export const whyChooseUs = [
+export const homeFeatureCards = [
   {
-    title: "We ask before we assume",
-    body: "Every support starts with a conversation about what you want, not a checklist of what we offer.",
+    icon: UserCheck,
+    title: "Experienced Support Workers",
+    body: "Our team brings genuine care, professional training, and a commitment to person-centred practice on every shift.",
   },
   {
-    title: "Registered NDIS Provider",
-    body: "Fully compliant, quality-audited and accountable — so your plan funds go further with confidence.",
+    icon: Heart,
+    title: "Person-Centred Support",
+    body: "We never assume what you need — we ask, listen, and shape support around your goals, routines, and preferences.",
   },
   {
-    title: "Locally rooted in Perth",
-    body: "Based in Forrestfield with deep ties to communities, services and venues across the metro area.",
+    icon: ShieldCheck,
+    title: "Reliable Care",
+    body: "Consistent, dependable support you can count on — with clear communication and flexible scheduling that fits your life.",
   },
   {
-    title: "Skilled, vetted support workers",
-    body: "Every team member is background-checked, trained, and matched to you on personality and goals — not just availability.",
-  },
-  {
-    title: "Flexible, responsive, real",
-    body: "Plans change, days change, people change. We adapt quickly and communicate clearly — no surprises.",
+    icon: Smile,
+    title: "Dedicated Attitude",
+    body: "Warmth, patience, and respect are non-negotiable. We show up ready to support, not just to complete a task list.",
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "They actually listened. After years of providers telling me what I needed, No Assumption asked me — and then they delivered.",
-    name: "Sarah M.",
-    role: "Participant, Forrestfield",
-  },
-  {
-    quote:
-      "My son lights up when his support worker arrives. That alone tells me we finally found the right team.",
-    name: "Jenna T.",
-    role: "Parent, Kalamunda",
-  },
-  {
-    quote:
-      "Professional, warm, and refreshingly honest. They treat my brother like an adult with goals, not a case file.",
-    name: "Daniel R.",
-    role: "Sibling, High Wycombe",
-  },
+export const homeSupportStats = [
+  { value: "7 Days", label: "Flexible support availability" },
+  { value: "Perth metro", label: "Service coverage area" },
+  { value: "100%", label: "Person-centred approach" },
+  { value: "1:1", label: "Support matched to you" },
 ];
+
+export const homeTrustHighlights = [
+  { title: "Person-centred support", body: "Support shaped around your goals, not assumptions." },
+  { title: "Reliable team", body: "Consistent, dependable care you can count on." },
+  { title: "Flexible care", body: "Scheduling and supports that fit your life." },
+  { title: "Community-focused", body: "Helping you stay connected and included." },
+];
+
+export const homeWhyChooseUs = [
+  "We listen first — never assume",
+  "Person-centred support",
+  "Respect, dignity and choice",
+  "Clear communication",
+  "Support tailored to individual goals",
+  "Focus on independence and inclusion",
+];
+
+export const homeCommitment = {
+  eyebrow: "Our Commitment",
+  title: "Your life, your choices — we're here to support both.",
+  body: "We believe every participant deserves support that honours who they are — not who others assume them to be. We listen first, respect your choices, and deliver care with confidence and connection.",
+  points: [
+    "Never assume — always ask first",
+    "Flexible, culturally responsive support",
+    "Collaboration with families and allied professionals",
+    "Committed to dignity at every step",
+  ],
+};
+
+export const missionStatement =
+  "Our mission is to deliver personalised, respectful, and assumption-free support that empowers every participant to live a meaningful and fulfilling life. We achieve this by taking the time to truly know each person — their goals, their story, and their unique circumstances. Through empathy, active listening, and collaboration, we ensure every individual feels seen, heard, and supported as they pursue social, emotional, and economic inclusion.";
+
+export const visionStatement =
+  "To create a community where every person is understood as an individual, honoured for their strengths, and supported to live with genuine choice, control, and belonging. We envision a world where assumptions never shape care — only understanding, respect, and human connection.";
+
+export const aboutIntro =
+  "At No Assumption Support Service, we provide personalised disability support built on a simple belief: never assume, always ask. We take the time to understand each person's story, strengths, and goals, so the support we offer truly reflects who they are.";
+
+export const aboutExtended =
+  "Our focus is on helping individuals live meaningful, independent, and self-directed lives, with care that respects choice, dignity, and control. By working closely with participants, families, carers, and allied professionals, we deliver flexible and culturally responsive support.";
+
+/** Preserved from live /about-us — founder and team trust content */
+export const founderStory =
+  "No Assumption Support Service was led by Jennifer, a grandmother from Western Australia. After more than a decade of experience in the disability and community services sector, she identified a consistent gap in support delivery. Assumptions were common, despite individual strengths, preferences, and voices. Many people were underestimated, and support workers were placed into roles without sufficient consideration of compatibility and genuine understanding. Through her work as a disability support worker and foster parent, Jennifer learned that meaningful support must be personal, respectful, and built on trust. Positive outcomes occur when support is delivered without assumptions and when people are given real choice, dignity, and control over how their supports are provided. This led to the establishment of No Assumption Support Service — a provider committed to person-centred, culturally aware, and strengths-based support, delivered with compassion and respect, and focused on supporting each person in their own way.";
+
+export const founderBio =
+  "I am a mother and proud grandmother who has lived in Western Australia for over two decades. I am an experienced disability support worker with more than 10 years of experience supporting NDIS participants, including both adults and children with diverse needs across a broad range of disabilities, including psychosocial disabilities. My experience as a foster carer has strongly shaped my approach to support, deepening my understanding of trauma-informed care, compassionate practice, and the importance of creating safe, nurturing environments where individuals feel valued, heard, and supported to thrive. I am genuinely passionate about the work I do and take pride in delivering tailored, person-centred NDIS supports that respect each individual's goals, strengths, culture, and independence. I look forward to meeting you and your family, and supporting you on your NDIS journey.";
+
+export const teamMembers = [
+  { name: "Jennifer G. Pratt", role: "Founder & Director" },
+  { name: "George Garley", role: "Manager" },
+  { name: "Lisa Gullo", role: "Support Co-ordinator" },
+] as const;

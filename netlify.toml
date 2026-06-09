@@ -1,0 +1,22 @@
+# No Assumption Support Service — Netlify staging (not production DNS)
+# Live site stays on Jimdo until client approves cutover.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# 301 permanent redirects — canonical URLs match live site (Jimdo)
+[[redirects]]
+  from = "/about"
+  to = "/about-us"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/services"
+  to = "/our-services"
+  status = 301
+  force = true

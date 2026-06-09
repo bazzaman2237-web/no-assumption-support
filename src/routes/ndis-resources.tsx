@@ -1,23 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ExternalLink, FileText, BookOpen, Phone, LifeBuoy } from "lucide-react";
-import { PageHero } from "./about";
+import { PageHero } from "@/components/PageHero";
+import { siteContact } from "@/data/site";
+import { pageMeta, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/ndis-resources")({
-  head: () => ({
-    meta: [
-      { title: "NDIS Resources | No Assumption Support Service" },
-      {
-        name: "description",
-        content:
-          "Helpful NDIS links, guides and support contacts for participants and families across Perth.",
-      },
-      { property: "og:title", content: "NDIS Resources | No Assumption Support Service" },
-      {
-        property: "og:description",
-        content: "Trusted links, guides and support lines for the NDIS in Australia.",
-      },
-    ],
-  }),
+  head: () => pageMeta(seo.ndisResources),
   component: ResourcesPage,
 });
 
@@ -123,6 +111,18 @@ function ResourcesPage() {
         ))}
       </section>
 
+      <section className="container-page pb-10">
+        <div className="rounded-2xl border border-border bg-card p-6 md:p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <p className="text-muted-foreground leading-relaxed">
+            Learn how the NDIS Quality and Safeguards Commission protects your rights and how we uphold quality
+            standards.
+          </p>
+          <Link to="/ndis-quality-and-safeguards-commission" className="btn-teal shrink-0">
+            NDIS Quality & Safeguards
+          </Link>
+        </div>
+      </section>
+
       <section className="container-page pb-20">
         <div className="rounded-[2rem] bg-warm p-10 md:p-12 text-center">
           <h2 className="font-display text-3xl md:text-4xl font-semibold text-deep">
@@ -132,8 +132,8 @@ function ResourcesPage() {
             NDIS paperwork can be confusing. Call us — we'll walk you through it in plain language,
             no obligation.
           </p>
-          <a href="tel:+61468880557" className="mt-7 inline-flex btn-primary">
-            Call +61 468 880 557
+          <a href={siteContact.phoneHref} className="mt-7 inline-flex btn-primary">
+            Call {siteContact.phone}
           </a>
         </div>
       </section>
