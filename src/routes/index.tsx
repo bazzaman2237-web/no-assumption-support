@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type CSSProperties } from "react";
 import {
   ArrowRight,
   Star,
@@ -18,6 +18,7 @@ import {
   homeTrustHighlights,
   homeWhyChooseUs,
   homeCommitment,
+  homeSupportStats,
   images,
   siteContact,
   aboutIntro,
@@ -27,6 +28,15 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { ServicePreviewCard } from "@/components/ServicePreviewCard";
 import { FormField } from "@/components/FormField";
 import { FormSuccess } from "@/components/FormSuccess";
+import {
+  AnimatedHeading,
+  HeroEntrance,
+  HeroRevealItem,
+  RevealItem,
+  RevealSection,
+  useRevealVisible,
+} from "@/components/Reveal";
+import { useCountUp } from "@/hooks/use-count-up";
 import { pageMeta, seo } from "@/lib/seo";
 import { buildMailtoUrl, readFormFields, submitViaMailto } from "@/lib/form-submit";
 
@@ -34,14 +44,13 @@ export const Route = createFileRoute("/")({
   head: () => pageMeta(seo.home),
   component: HomePage,
 });
-
 const trustIcons = [UserCheck, ShieldCheck, Clock, Users];
-
 function HomePage() {
   return (
     <>
       <Hero />
       <TrustStrip />
+      <StatsStrip />
       <Commitment />
       <ServicesPreview />
       <WhyChooseUs />
@@ -52,41 +61,65 @@ function HomePage() {
     </>
   );
 }
-
 function Hero() {
   return (
     <section className="section-hero-wrap pt-6 pb-10 md:pt-8 md:pb-12">
       <div className="container-page">
         <div className="hero-panel relative overflow-hidden px-6 py-10 md:px-10 md:py-14 lg:px-14 lg:py-16">
-          <div className="absolute -top-20 -right-16 w-72 h-72 rounded-full bg-hero-blob/80 blur-2xl pointer-events-none" />
-          <div className="absolute top-1/3 -left-16 w-64 h-64 rounded-full bg-primary/10 blur-3xl pointer-events-none" />
-
-          <div className="relative grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <div className="absolute -top-20 -right-16 w-72 h-72 rounded-full bg-hero-blob/80 blur-2xl pointer-events-none reveal-blob" />
+          <div
+            className="absolute top-1/3 -left-16 w-64 h-64 rounded-full bg-primary/10 blur-3xl pointer-events-none reveal-blob"
+            style={{ animationDelay: "-5s" }}
+          />
+          <HeroEntrance className="relative grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
             <div>
-              <h1 className="heading-xl">Support That Puts People First</h1>
-              <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
-                Respectful, person-centred NDIS support from Forrestfield across the Perth metropolitan area — helping you build
-                independence, confidence, and connection.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-3">
-                <Link to="/forms" className="btn-primary">
-                  Make a Referral <ArrowRight className="size-4" />
-                </Link>
-                <Link to="/about-us" className="btn-teal">
-                  About Us
-                </Link>
-              </div>
-              <div className="mt-7 flex items-center gap-3">
-                <span className="font-display font-semibold text-deep">Trusted Care</span>
-                <div className="flex gap-0.5" aria-hidden="true">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="size-4 fill-star text-star" />
-                  ))}
+              <HeroRevealItem delayMs={0}>
+                <h1 className="heading-xl reveal-heading">
+                  <span className="reveal-word" style={{ animationDelay: "0.1s" }}>
+                    Support
+                  </span>{" "}
+                  <span className="reveal-word" style={{ animationDelay: "0.17s" }}>
+                    That
+                  </span>{" "}
+                  <span className="reveal-word" style={{ animationDelay: "0.24s" }}>
+                    Puts
+                  </span>{" "}
+                  <span className="reveal-word" style={{ animationDelay: "0.31s" }}>
+                    People
+                  </span>{" "}
+                  <span className="reveal-word" style={{ animationDelay: "0.38s" }}>
+                    First
+                  </span>
+                </h1>
+              </HeroRevealItem>
+              <HeroRevealItem delayMs={120}>
+                <p className="mt-5 text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl">
+                  Respectful, person-centred NDIS support from Forrestfield across the Perth metropolitan area — helping you build
+                  independence, confidence, and connection.
+                </p>
+              </HeroRevealItem>
+              <HeroRevealItem delayMs={240}>
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <Link to="/forms" className="btn-primary">
+                    Make a Referral <ArrowRight className="size-4" />
+                  </Link>
+                  <Link to="/about-us" className="btn-teal">
+                    About Us
+                  </Link>
                 </div>
-              </div>
+              </HeroRevealItem>
+              <HeroRevealItem delayMs={360}>
+                <div className="mt-7 flex items-center gap-3">
+                  <span className="font-display font-semibold text-deep">Trusted Care</span>
+                  <div className="flex gap-0.5" aria-hidden="true">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="size-4 fill-star text-star" />
+                    ))}
+                  </div>
+                </div>
+              </HeroRevealItem>
             </div>
-
-            <div className="relative min-h-[280px] sm:min-h-[360px] lg:min-h-[420px]">
+            <HeroRevealItem delayMs={180} className="relative min-h-[280px] sm:min-h-[360px] lg:min-h-[420px]">
               <div className="absolute inset-x-4 top-6 bottom-0 rounded-card overflow-hidden shadow-[0_24px_50px_-24px_rgb(18_50_74/30%)]">
                 <img
                   src={images.hero}
@@ -111,261 +144,331 @@ function Hero() {
                   </p>
                 </div>
               </div>
-            </div>
-          </div>
+            </HeroRevealItem>
+          </HeroEntrance>
         </div>
       </div>
     </section>
   );
 }
-
 function TrustStrip() {
   return (
-    <section className="section-sky section-pad-sm">
+    <RevealSection className="section-sky section-pad-sm">
       <div className="container-page">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {homeTrustHighlights.map((item, i) => {
             const Icon = trustIcons[i] ?? UserCheck;
             return (
-              <div key={item.title} className="card-elevated p-6 text-center">
-                <div className="icon-badge size-11 mx-auto">
-                  <Icon className="size-5" />
+              <RevealItem key={item.title} delayMs={i * 100}>
+                <div className="reveal-float-inner card-elevated p-6 text-center h-full">
+                  <div className="icon-badge size-11 mx-auto">
+                    <Icon className="size-5" />
+                  </div>
+                  <h3 className="mt-4 font-display text-base font-semibold text-deep">{item.title}</h3>
+                  <p className="mt-2 text-sm text-muted-foreground">{item.body}</p>
                 </div>
-                <h3 className="mt-4 font-display text-base font-semibold text-deep">{item.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{item.body}</p>
-              </div>
+              </RevealItem>
             );
           })}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }
+function StatValue({ value }: { value: string }) {
+  const visible = useRevealVisible();
+  const display = useCountUp(value, visible);
+  return <span className="stats-strip-value">{display}</span>;
+}
 
-function Commitment() {
+function StatsStrip() {
   return (
-    <section className="section-white section-pad-sm">
-      <div className="container-page grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-        <div>
-          <span className="section-label">{homeCommitment.eyebrow}</span>
-          <h2 className="heading-lg mt-3">{homeCommitment.title}</h2>
-          <p className="mt-4 text-muted-foreground leading-relaxed">{aboutIntro}</p>
-          <p className="mt-3 text-muted-foreground leading-relaxed">{homeCommitment.body}</p>
-          <Link to="/about-us" className="mt-6 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all">
-            Learn more about us <ArrowRight className="size-4" />
-          </Link>
-        </div>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {homeCommitment.points.map((point) => (
-            <div key={point} className="card-elevated p-5">
-              <CheckCircle2 className="size-5 text-primary" />
-              <p className="mt-3 text-sm font-medium text-deep">{point}</p>
-            </div>
+    <RevealSection className="section-white section-pad-sm border-y border-border/60">
+      <div className="container-page">
+        <RevealItem delayMs={0} className="text-center max-w-2xl mx-auto mb-8 md:mb-10">
+          <span className="section-label">What sets us apart</span>
+          <h2 className="heading-md mt-3">Support built around you</h2>
+        </RevealItem>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-4xl mx-auto text-center">
+          {homeSupportStats.map((stat, i) => (
+            <RevealItem key={stat.label} delayMs={100 + i * 100}>
+              <StatValue value={stat.value} />
+              <p className="stats-strip-label">{stat.label}</p>
+            </RevealItem>
           ))}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }
-
+function Commitment() {
+  return (
+    <RevealSection className="section-white section-pad-sm overflow-hidden">
+      <div
+        className="reveal-blob pointer-events-none absolute -right-24 top-1/4 h-72 w-72 rounded-full bg-primary/8 blur-3xl"
+        aria-hidden="true"
+      />
+      <div
+        className="reveal-blob pointer-events-none absolute -left-16 bottom-0 h-56 w-56 rounded-full bg-hero-blob/90 blur-3xl"
+        style={{ animationDelay: "-4s" }}
+        aria-hidden="true"
+      />
+      <div className="container-page relative grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+        <div>
+          <RevealItem delayMs={0}>
+            <span className="section-label block">{homeCommitment.eyebrow}</span>
+          </RevealItem>
+          <AnimatedHeading
+            text={homeCommitment.title}
+            className="heading-lg mt-3"
+          />
+          <RevealItem delayMs={200}>
+            <p className="mt-4 text-muted-foreground leading-relaxed">{aboutIntro}</p>
+          </RevealItem>
+          <RevealItem delayMs={320}>
+            <p className="mt-3 text-muted-foreground leading-relaxed">{homeCommitment.body}</p>
+          </RevealItem>
+          <RevealItem delayMs={440}>
+            <Link
+              to="/about-us"
+              className="mt-6 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all"
+            >
+              Learn more about us <ArrowRight className="size-4" />
+            </Link>
+          </RevealItem>
+        </div>
+        <ul className="grid sm:grid-cols-2 gap-4">
+          {homeCommitment.points.map((point, index) => (
+            <li
+              key={point}
+              className="reveal-float-card"
+              style={{ "--reveal-delay": `${index * 100}ms` } as CSSProperties}
+            >
+              <div className="reveal-float-inner card-elevated p-5 h-full transition-shadow hover:shadow-[0_20px_50px_-24px_rgb(18_50_74/22%)]">
+                <CheckCircle2 className="size-5 text-primary" aria-hidden="true" />
+                <p className="mt-3 text-sm font-medium text-deep">{point}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </RevealSection>
+  );
+}
 function ServicesPreview() {
   return (
-    <section className="section-teal section-pad-sm">
+    <RevealSection className="section-teal section-pad-sm">
       <div className="container-page">
         <SectionHeader
           label="Our Services"
           title="Support tailored to your everyday life"
           subtitle="Explore each service for full details — short summaries only here."
+          animate
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6 items-stretch">
-          {homeServicePreviews.map((s) => (
-            <ServicePreviewCard
-              key={s.to}
-              title={s.title}
-              description={s.description}
-              to={s.to}
-              image={s.image}
-              buttonLabel={s.buttonLabel}
-            />
+          {homeServicePreviews.map((s, i) => (
+            <RevealItem key={s.to} delayMs={i * 100} className="h-full">
+              <ServicePreviewCard
+                title={s.title}
+                description={s.description}
+                to={s.to}
+                image={s.image}
+                buttonLabel={s.buttonLabel}
+              />
+            </RevealItem>
           ))}
         </div>
-        <div className="mt-10 text-center">
+        <RevealItem delayMs={400} className="mt-10 text-center">
           <Link to="/our-services" className="btn-outline">
             View all services
           </Link>
-        </div>
+        </RevealItem>
       </div>
-    </section>
+    </RevealSection>
   );
 }
-
 function WhyChooseUs() {
   return (
-    <section className="section-trust section-pad-sm">
+    <RevealSection className="section-trust section-pad-sm">
       <div className="container-page">
         <SectionHeader
           label="Why Choose Us"
           title="Support you can trust, delivered with heart"
           subtitle="What sets No Assumption apart for participants and families in our service area."
           onDark
+          animate
         />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-          {homeWhyChooseUs.map((item) => (
-            <div
-              key={item}
-              className="flex items-start gap-3 bg-white/10 backdrop-blur-sm border border-white/15 rounded-card p-5"
-            >
-              <CheckCircle2 className="size-5 text-label-on-dark shrink-0 mt-0.5" />
-              <span className="text-deep-foreground font-medium">{item}</span>
-            </div>
+          {homeWhyChooseUs.map((item, i) => (
+            <RevealItem key={item} delayMs={i * 100}>
+              <div className="flex items-start gap-3 bg-white/10 backdrop-blur-sm border border-white/15 rounded-card p-5 h-full">
+                <CheckCircle2 className="size-5 text-label-on-dark shrink-0 mt-0.5" />
+                <span className="text-deep-foreground font-medium">{item}</span>
+              </div>
+            </RevealItem>
           ))}
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }
-
 function MeetAndGreetCta() {
   return (
-    <section className="section-sky section-pad-sm">
+    <RevealSection className="section-sky section-pad-sm">
       <div className="container-page max-w-3xl">
-        <div className="hero-panel p-8 md:p-12 text-center">
-          <span className="section-label">{meetAndGreet.title}</span>
-          <h2 className="heading-lg mt-3">{meetAndGreet.heading}</h2>
-          <p className="mt-3 text-muted-foreground max-w-lg mx-auto">{meetAndGreet.teaser}</p>
-          <Link to="/meet-and-greet" className="mt-8 inline-flex btn-primary">
-            {meetAndGreet.cta} <ArrowRight className="size-4" />
-          </Link>
-        </div>
+        <RevealItem delayMs={0}>
+          <div className="hero-panel p-8 md:p-12 text-center">
+            <span className="section-label">{meetAndGreet.title}</span>
+            <AnimatedHeading text={meetAndGreet.heading} className="heading-lg mt-3" />
+            <p className="mt-3 text-muted-foreground max-w-lg mx-auto">{meetAndGreet.teaser}</p>
+            <Link to="/meet-and-greet" className="mt-8 inline-flex btn-primary">
+              {meetAndGreet.cta} <ArrowRight className="size-4" />
+            </Link>
+          </div>
+        </RevealItem>
       </div>
-    </section>
+    </RevealSection>
   );
 }
-
 function CulturalTeaser() {
   return (
-    <section className="section-white section-pad-sm">
+    <RevealSection className="section-white section-pad-sm">
       <div className="container-page max-w-3xl text-center">
-        <span className="section-label">Inclusion</span>
-        <h2 className="heading-md mt-3">{culturalDiversity.hero.title}</h2>
-        <p className="mt-3 text-muted-foreground">{culturalDiversity.hero.teaser}</p>
-        <Link to="/cultural-diversity" className="mt-6 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all">
-          Learn More <ArrowRight className="size-4" />
-        </Link>
+        <RevealItem delayMs={0}>
+          <span className="section-label">Inclusion</span>
+        </RevealItem>
+        <AnimatedHeading text={culturalDiversity.hero.title} className="heading-md mt-3" />
+        <RevealItem delayMs={200}>
+          <p className="mt-3 text-muted-foreground">{culturalDiversity.hero.teaser}</p>
+        </RevealItem>
+        <RevealItem delayMs={300}>
+          <Link
+            to="/cultural-diversity"
+            className="mt-6 inline-flex items-center gap-2 font-semibold text-primary hover:gap-3 transition-all"
+          >
+            Learn More <ArrowRight className="size-4" />
+          </Link>
+        </RevealItem>
       </div>
-    </section>
+    </RevealSection>
   );
 }
-
 function FormsCta() {
   return (
-    <section className="section-teal section-pad-sm">
+    <RevealSection className="section-teal section-pad-sm">
       <div className="container-page">
         <SectionHeader
           title="Get in touch your way"
           subtitle="Referrals, careers, and feedback — we're here to listen."
+          animate
         />
         <div className="flex flex-wrap justify-center gap-4">
-          <Link to="/forms" className="btn-primary">
-            Make a Referral <ArrowRight className="size-4" />
-          </Link>
-          <Link to="/forms" search={{ tab: "career" }} className="btn-teal">
-            Careers
-          </Link>
-          <a href={`mailto:${siteContact.feedbackEmail}`} className="btn-outline">
-            Feedback & Complaints
-          </a>
+          <RevealItem delayMs={100}>
+            <Link to="/forms" className="btn-primary">
+              Make a Referral <ArrowRight className="size-4" />
+            </Link>
+          </RevealItem>
+          <RevealItem delayMs={200}>
+            <Link to="/forms" search={{ tab: "career" }} className="btn-teal">
+              Careers
+            </Link>
+          </RevealItem>
+          <RevealItem delayMs={300}>
+            <a href={`mailto:${siteContact.feedbackEmail}`} className="btn-outline">
+              Feedback & Complaints
+            </a>
+          </RevealItem>
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }
-
 function ContactSection() {
   const [sent, setSent] = useState(false);
-
   return (
-    <section id="contact" className="section-white section-pad-sm">
+    <RevealSection id="contact" className="section-white section-pad-sm">
       <div className="container-page">
         <SectionHeader
           label="Contact Us"
           title="We'd love to hear from you"
           subtitle="Reach out by phone, email, or the form below. We respond within one business day."
+          animate
         />
-
         <div className="grid lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
           <div className="lg:col-span-2 space-y-3">
             {[
               { icon: Phone, label: "Phone", value: siteContact.phone, href: siteContact.phoneHref },
               { icon: Mail, label: "Email", value: siteContact.email, href: `mailto:${siteContact.email}` },
               { icon: MapPin, label: "Location", value: siteContact.address, href: siteContact.mapsHref },
-            ].map((c) => (
-              <a
-                key={c.label}
-                href={c.href}
-                target={c.href.startsWith("http") ? "_blank" : undefined}
-                rel="noreferrer"
-                className="flex items-center gap-4 card-elevated p-5 hover:-translate-y-0.5 transition-transform"
-              >
-                <div className="icon-badge size-11 shrink-0">
-                  <c.icon className="size-5" />
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{c.label}</p>
-                  <p className="font-semibold text-deep">{c.value}</p>
-                </div>
-              </a>
+            ].map((c, i) => (
+              <RevealItem key={c.label} delayMs={i * 100}>
+                <a
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel="noreferrer"
+                  className="flex items-center gap-4 card-elevated p-5 hover:-translate-y-0.5 transition-transform"
+                >
+                  <div className="icon-badge size-11 shrink-0">
+                    <c.icon className="size-5" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{c.label}</p>
+                    <p className="font-semibold text-deep">{c.value}</p>
+                  </div>
+                </a>
+              </RevealItem>
             ))}
           </div>
-
-          <div className="lg:col-span-3 card-elevated p-7 md:p-8">
-            {sent ? (
-              <FormSuccess
-                message="Your email app should open with your enquiry ready to send. We'll respond within one business day once received."
-                fallbackEmail={siteContact.email}
-              />
-            ) : (
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  const { get } = readFormFields(e.currentTarget);
-                  submitViaMailto(
-                    buildMailtoUrl({
-                      to: siteContact.email,
-                      subject: "Homepage enquiry — No Assumption Support Service",
-                      fields: {
-                        Name: get("name"),
-                        Phone: get("phone"),
-                        Email: get("email"),
-                        Message: get("message"),
-                      },
-                    }),
-                  );
-                  setSent(true);
-                }}
-                className="space-y-4"
-              >
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <FormField label="Your name" name="name" required placeholder="Your full name" />
-                  <FormField label="Phone" name="phone" type="tel" required placeholder="Your phone number" />
-                </div>
-                <FormField label="Email" name="email" type="email" required placeholder="you@example.com" />
-                <FormField
-                  label="How can we help?"
-                  name="message"
-                  as="textarea"
-                  rows={4}
-                  required
-                  placeholder="Tell us how we can support you..."
+          <RevealItem delayMs={300} className="lg:col-span-3">
+            <div className="card-elevated p-7 md:p-8 h-full">
+              {sent ? (
+                <FormSuccess
+                  message="Your email app should open with your enquiry ready to send. We'll respond within one business day once received."
+                  fallbackEmail={siteContact.email}
                 />
-                <button type="submit" className="btn-primary w-full sm:w-auto">
-                  <Send className="size-4" /> Submit enquiry
-                </button>
-              </form>
-            )}
-          </div>
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const { get } = readFormFields(e.currentTarget);
+                    submitViaMailto(
+                      buildMailtoUrl({
+                        to: siteContact.email,
+                        subject: "Homepage enquiry — No Assumption Support Service",
+                        fields: {
+                          Name: get("name"),
+                          Phone: get("phone"),
+                          Email: get("email"),
+                          Message: get("message"),
+                        },
+                      }),
+                    );
+                    setSent(true);
+                  }}
+                  className="space-y-4"
+                >
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    <FormField label="Your name" name="name" required placeholder="Your full name" />
+                    <FormField label="Phone" name="phone" type="tel" required placeholder="Your phone number" />
+                  </div>
+                  <FormField label="Email" name="email" type="email" required placeholder="you@example.com" />
+                  <FormField
+                    label="How can we help?"
+                    name="message"
+                    as="textarea"
+                    rows={4}
+                    required
+                    placeholder="Tell us how we can support you..."
+                  />
+                  <button type="submit" className="btn-primary w-full sm:w-auto">
+                    <Send className="size-4" /> Submit enquiry
+                  </button>
+                </form>
+              )}
+            </div>
+          </RevealItem>
         </div>
       </div>
-    </section>
+    </RevealSection>
   );
 }

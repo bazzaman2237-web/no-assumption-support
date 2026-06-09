@@ -429,9 +429,167 @@
   100% { transform: translateX(0); }
 }
 
+/* Paramount Care–inspired motion: fadeInUp scroll reveals, word headings, counters */
+@keyframes revealFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealWordUp {
+  from {
+    opacity: 0;
+    transform: translateY(0.85em);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes revealCardFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes revealBlobDrift {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(12px, -8px) scale(1.04);
+  }
+}
+
+.reveal-section {
+  position: relative;
+}
+
+.reveal-up {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal-section.is-visible .reveal-up {
+  animation: revealFadeInUp 0.75s ease forwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-heading .reveal-word {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.85em);
+}
+
+.reveal-section.is-visible .reveal-heading .reveal-word {
+  animation: revealWordUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Hero entrance on page load */
+.hero-reveal-up {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.hero-entrance.is-loaded .hero-reveal-up {
+  animation: revealFadeInUp 0.8s ease forwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.hero-entrance.is-loaded .reveal-heading .reveal-word {
+  animation: revealWordUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.reveal-section.is-visible .reveal-up .reveal-float-inner {
+  animation: revealCardFloat 5.5s ease-in-out infinite;
+}
+
+.reveal-section.is-visible .reveal-up:nth-child(2) .reveal-float-inner {
+  animation-delay: 0.6s;
+}
+
+.reveal-section.is-visible .reveal-up:nth-child(3) .reveal-float-inner {
+  animation-delay: 1.2s;
+}
+
+.reveal-section.is-visible .reveal-up:nth-child(4) .reveal-float-inner {
+  animation-delay: 1.8s;
+}
+
+/* Floating accent cards (commitment + trust) */
+.reveal-float-card {
+  opacity: 0;
+  transform: translateY(28px);
+}
+
+.reveal-section.is-visible .reveal-float-card {
+  animation: revealFadeInUp 0.7s ease forwards;
+  animation-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-section.is-visible .reveal-float-inner {
+  animation: revealCardFloat 5.5s ease-in-out infinite;
+}
+
+.reveal-section.is-visible .reveal-float-card:nth-child(2) .reveal-float-inner {
+  animation-delay: 0.6s;
+}
+
+.reveal-section.is-visible .reveal-float-card:nth-child(3) .reveal-float-inner {
+  animation-delay: 1.2s;
+}
+
+.reveal-section.is-visible .reveal-float-card:nth-child(4) .reveal-float-inner {
+  animation-delay: 1.8s;
+}
+
+.reveal-blob {
+  animation: revealBlobDrift 14s ease-in-out infinite;
+}
+
+/* Stats strip — odometer-style counters */
+.stats-strip-value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-deep);
+  font-variant-numeric: tabular-nums;
+}
+
+.stats-strip-label {
+  margin-top: 0.35rem;
+  font-size: 0.875rem;
+  color: var(--color-muted-foreground);
+  line-height: 1.4;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .ndis-logo-box-float,
-  .listen-first-box-float {
+  .listen-first-box-float,
+  .reveal-blob {
     animation: none;
+  }
+
+  .reveal-up,
+  .hero-reveal-up,
+  .hero-entrance .reveal-heading .reveal-word,
+  .reveal-heading .reveal-word,
+  .reveal-float-card,
+  .reveal-float-inner {
+    opacity: 1;
+    transform: none;
+    animation: none !important;
   }
 }
