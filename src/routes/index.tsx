@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
 import {
   ArrowRight,
   Star,
@@ -7,7 +6,6 @@ import {
   Phone,
   Mail,
   MapPin,
-  Send,
   HeartHandshake,
   UserCheck,
   ShieldCheck,
@@ -25,8 +23,7 @@ import {
 import { homeServicePreviews, meetAndGreet, culturalDiversity } from "@/data/pages";
 import { SectionHeader } from "@/components/SectionHeader";
 import { ServicePreviewCard } from "@/components/ServicePreviewCard";
-import { FormField } from "@/components/FormField";
-import { FormSuccess } from "@/components/FormSuccess";
+import { ContactCta } from "@/components/ContactCta";
 import { CommitmentCollage } from "@/components/CommitmentCollage";
 import {
   AnimatedHeading,
@@ -36,7 +33,6 @@ import {
   RevealSection,
 } from "@/components/Reveal";
 import { pageMeta, seo } from "@/lib/seo";
-import { buildMailtoUrl, readFormFields, submitViaMailto } from "@/lib/form-submit";
 
 export const Route = createFileRoute("/")({
   head: () => pageMeta(seo.home),
@@ -97,8 +93,8 @@ function Hero() {
               </HeroRevealItem>
               <HeroRevealItem delayMs={240}>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Link to="/forms" className="btn-primary">
-                    Make a Referral <ArrowRight className="size-4" />
+                  <Link to="/contact" className="btn-primary">
+                    Start a conversation <ArrowRight className="size-4" />
                   </Link>
                   <Link to="/about-us" className="btn-teal">
                     About Us
@@ -214,8 +210,8 @@ function Commitment() {
             })}
           </ul>
           <RevealItem delayMs={650}>
-            <Link to="/forms" className="btn-primary mt-8 w-full sm:w-auto">
-              Make a Referral <ArrowRight className="size-4" />
+            <Link to="/contact" className="btn-primary mt-8 w-full sm:w-auto">
+              Start a conversation <ArrowRight className="size-4" />
             </Link>
           </RevealItem>
         </div>
@@ -326,44 +322,67 @@ function CulturalTeaser() {
   );
 }
 function FormsCta() {
+  const cards: {
+    kind: "referral" | "career" | "feedback";
+    heading: string;
+    description: string;
+    showPhone: boolean;
+  }[] = [
+    {
+      kind: "referral",
+      heading: "Make a referral",
+      description: "Refer a participant, family member, or support coordinator. We'll respond within one business day.",
+      showPhone: true,
+    },
+    {
+      kind: "career",
+      heading: "Careers",
+      description: "Interested in joining our team? Email us your experience and the type of role you're looking for.",
+      showPhone: true,
+    },
+    {
+      kind: "feedback",
+      heading: "Feedback & complaints",
+      description: "Share compliments, suggestions, or concerns — we take every message seriously.",
+      showPhone: true,
+    },
+  ];
+
   return (
     <RevealSection className="section-teal section-pad-sm">
       <div className="container-page">
         <SectionHeader
           title="Get in touch your way"
-          subtitle="Referrals, careers, and feedback — we're here to listen."
+          subtitle="Referrals, careers, and feedback — email or call us directly."
           animate
         />
-        <div className="flex flex-wrap justify-center gap-4">
-          <RevealItem delayMs={100}>
-            <Link to="/forms" className="btn-primary">
-              Make a Referral <ArrowRight className="size-4" />
-            </Link>
-          </RevealItem>
-          <RevealItem delayMs={200}>
-            <Link to="/forms" search={{ tab: "career" }} className="btn-teal">
-              Careers
-            </Link>
-          </RevealItem>
-          <RevealItem delayMs={300}>
-            <a href={`mailto:${siteContact.feedbackEmail}`} className="btn-outline">
-              Feedback & Complaints
-            </a>
-          </RevealItem>
+        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {cards.map((card, i) => (
+            <RevealItem key={card.kind} delayMs={100 + i * 100}>
+              <div className="card-elevated p-6 md:p-7 h-full">
+                <ContactCta
+                  kind={card.kind}
+                  heading={card.heading}
+                  description={card.description}
+                  showPhone={card.showPhone}
+                />
+              </div>
+            </RevealItem>
+          ))}
         </div>
       </div>
     </RevealSection>
   );
 }
+
 function ContactSection() {
-  const [sent, setSent] = useState(false);
   return (
     <RevealSection id="contact" className="section-white section-pad-sm">
       <div className="container-page">
         <SectionHeader
           label="Contact Us"
           title="We'd love to hear from you"
-          subtitle="Reach out by phone, email, or the form below. We respond within one business day."
+          subtitle="Reach out by phone or email — we respond within one business day."
           animate
         />
         <div className="grid lg:grid-cols-5 gap-6 max-w-5xl mx-auto">
@@ -371,6 +390,7 @@ function ContactSection() {
             {[
               { icon: Phone, label: "Phone", value: siteContact.phone, href: siteContact.phoneHref },
               { icon: Mail, label: "Email", value: siteContact.email, href: `mailto:${siteContact.email}` },
+              { icon: Mail, label: "Feedback", value: siteContact.feedbackEmail, href: `mailto:${siteContact.feedbackEmail}` },
               { icon: MapPin, label: "Location", value: siteContact.address, href: siteContact.mapsHref },
             ].map((c, i) => (
               <RevealItem key={c.label} delayMs={i * 100}>
@@ -393,50 +413,12 @@ function ContactSection() {
           </div>
           <RevealItem delayMs={300} className="lg:col-span-3">
             <div className="card-elevated p-7 md:p-8 h-full">
-              {sent ? (
-                <FormSuccess
-                  message="Your email app should open with your enquiry ready to send. We'll respond within one business day once received."
-                  fallbackEmail={siteContact.email}
-                />
-              ) : (
-                <form
-                  onSubmit={(e) => {
-                    e.preventDefault();
-                    const { get } = readFormFields(e.currentTarget);
-                    submitViaMailto(
-                      buildMailtoUrl({
-                        to: siteContact.email,
-                        subject: "Homepage enquiry — No Assumption Support Service",
-                        fields: {
-                          Name: get("name"),
-                          Phone: get("phone"),
-                          Email: get("email"),
-                          Message: get("message"),
-                        },
-                      }),
-                    );
-                    setSent(true);
-                  }}
-                  className="space-y-4"
-                >
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <FormField label="Your name" name="name" required placeholder="Your full name" />
-                    <FormField label="Phone" name="phone" type="tel" required placeholder="Your phone number" />
-                  </div>
-                  <FormField label="Email" name="email" type="email" required placeholder="you@example.com" />
-                  <FormField
-                    label="How can we help?"
-                    name="message"
-                    as="textarea"
-                    rows={4}
-                    required
-                    placeholder="Tell us how we can support you..."
-                  />
-                  <button type="submit" className="btn-primary w-full sm:w-auto">
-                    <Send className="size-4" /> Submit enquiry
-                  </button>
-                </form>
-              )}
+              <ContactCta
+                kind="general"
+                heading="Send us a message"
+                description="Tell us a little about yourself and how we can support you. Your email app will open ready to send."
+                showPhone
+              />
             </div>
           </RevealItem>
         </div>

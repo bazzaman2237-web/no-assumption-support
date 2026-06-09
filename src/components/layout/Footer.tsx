@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
 import type { ReactNode } from "react";
 import { AustraliaAboriginalFlags } from "@/components/AustraliaAboriginalFlags";
 import { images, siteContact, acknowledgementText, missionStatement } from "@/data/site";
+import { mailtoLinks } from "@/lib/mailto";
 import { homeServicePreviews } from "@/data/pages";
 
 const quickLinks = [
@@ -20,9 +21,8 @@ const quickLinks = [
 
 const formLinks = [
   { to: "/forms", label: "Make a Referral" },
-  { to: "/forms", label: "Careers", search: { tab: "career" as const } },
-  { href: `mailto:${siteContact.feedbackEmail}`, label: "Feedback & Complaints" },
-  { to: "/forms", label: "Feedback form", search: { tab: "feedback" as const } },
+  { to: "/forms", search: { tab: "career" as const }, label: "Careers" },
+  { href: mailtoLinks.feedback, label: "Feedback & Complaints" },
   { to: "/consent", label: "Consent" },
   { to: "/ndis-funding", label: "NDIS Funding / Price" },
 ] as const;

@@ -22,7 +22,6 @@ export const Route = createFileRoute("/personal-care-and-transitions")({
         benefitsTitle={d.ourGoal.title}
         benefitsItems={d.ourGoal.items}
         whyChoose={d.ourGoal.body}
-        ctaLabel="Start your journey with us"
       />
     );
   },

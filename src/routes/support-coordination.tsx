@@ -22,7 +22,6 @@ export const Route = createFileRoute("/support-coordination")({
           { title: d.approach.title, body: d.approach.body, items: d.approach.items },
           { title: d.afterContact.title, steps: d.afterContact.steps },
         ]}
-        ctaLabel="Contact us about Support Coordination"
       />
     );
   },

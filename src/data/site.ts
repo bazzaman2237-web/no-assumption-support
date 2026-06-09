@@ -224,3 +224,26 @@ export const teamMembers = [
     image: "/images/team/team-lisa-gullo.png",
   },
 ] as const;
+
+export const joinOurTeam = {
+  title: "Join Our Team",
+  intro:
+    "At No Assumption Support Service, we are always looking for caring, reliable, and passionate people to join our team.",
+  documentsIntro: "To apply, please provide the following documents:",
+  documents: [
+    "Relevant qualifications for the position you are applying for",
+    "Current resume/CV with two recent professional referees",
+    "100 points of identification, such as passport, driver's licence, or Medicare card",
+    "Working with Children Check (WWCC)",
+    "Current and valid NDIS Worker Screening Check",
+    "Current and valid National Police Clearance",
+    "Current First Aid and CPR Certificate",
+    "NDIS Worker Orientation Module Certificate",
+    "COVID-19 vaccination record, where applicable",
+    "COVID-19 Infection Control Training Certificate",
+  ],
+  trainingTitle: "Training and Induction",
+  trainingBody:
+    "We are committed to supporting our team members to succeed. Successful applicants will take part in our induction program, with ongoing on-the-job training and support provided to help them feel confident in their role.",
+  applyLabel: "Apply Today",
+} as const;

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ContactCta } from "@/components/ContactCta";
 import { PageHero } from "@/components/PageHero";
 import { meetAndGreet } from "@/data/pages";
 import { pageMeta, seo } from "@/lib/seo";
@@ -24,12 +25,17 @@ export const Route = createFileRoute("/meet-and-greet")({
                   </li>
                 ))}
               </ul>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Link to="/contact" className="btn-primary">
-                  {d.cta} <ArrowRight className="size-4" />
-                </Link>
-                <Link to="/forms" className="btn-teal">
-                  Make a Referral
+              <div className="mt-10 card-elevated p-7 md:p-8">
+                <ContactCta
+                  kind="meetAndGreet"
+                  heading="Book your FREE Meet & Greet"
+                  description="Email us to arrange a relaxed 45-minute introduction — no obligation, no pressure."
+                  showPhone
+                />
+              </div>
+              <div className="mt-6 text-center">
+                <Link to="/forms" className="btn-outline">
+                  Make a Referral <ArrowRight className="size-4" />
                 </Link>
               </div>
             </div>

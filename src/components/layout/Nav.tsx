@@ -104,8 +104,8 @@ export function Nav() {
         </nav>
 
         <div className="flex items-center justify-end gap-2 shrink-0">
-          <Link to="/forms" className="hidden lg:inline-flex btn-gradient whitespace-nowrap shrink-0">
-            Make a Referral
+          <Link to="/contact" className="hidden lg:inline-flex btn-gradient whitespace-nowrap shrink-0">
+            Get in touch
           </Link>
           <button
             onClick={() => setOpen((v) => !v)}
@@ -143,8 +143,8 @@ export function Nav() {
                 {l.label}
               </Link>
             ))}
-            <Link to="/forms" onClick={() => setOpen(false)} className="btn-gradient mt-3 self-start">
-              Make a Referral
+            <Link to="/contact" onClick={() => setOpen(false)} className="btn-gradient mt-3 self-start">
+              Get in touch
             </Link>
           </div>
         </div>

@@ -3,6 +3,7 @@ import { ExternalLink, ShieldCheck } from "lucide-react";
 import { PageHero } from "@/components/PageHero";
 import { FaqAccordion } from "@/components/FaqAccordion";
 import { siteContact } from "@/data/site";
+import { mailtoLinks } from "@/lib/mailto";
 import { pageMeta, seo } from "@/lib/seo";
 
 export const Route = createFileRoute("/ndis-quality-and-safeguards-commission")({
@@ -104,10 +105,10 @@ function NdisQualitySafeguardsPage() {
               Contact us
             </Link>
             <a
-              href={`mailto:${siteContact.feedbackEmail}`}
+              href={mailtoLinks.feedback}
               className="inline-flex items-center justify-center gap-2 rounded-full px-8 py-4 font-semibold text-sm border border-white/50 text-white hover:bg-white/10 transition-colors"
             >
-              Email {siteContact.feedbackEmail}
+              Email Feedback &amp; Complaints
             </a>
           </div>
         </div>

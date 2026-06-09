@@ -10,6 +10,7 @@ import {
   founderBio,
   teamMembers,
 } from "@/data/site";
+import { JoinOurTeamSection } from "@/components/JoinOurTeamSection";
 import { PageHero } from "@/components/PageHero";
 import { pageMeta, seo } from "@/lib/seo";
 
@@ -119,6 +120,8 @@ function AboutPage() {
           </div>
         </div>
       </section>
+
+      <JoinOurTeamSection />
     </>
   );
 }
