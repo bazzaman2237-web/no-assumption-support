@@ -43,6 +43,7 @@ export function ContactCta({
   showPhone = true,
   centered = false,
   onDark = false,
+  layout = "default",
   className = "",
 }: {
   kind?: ContactCtaKind;
@@ -51,35 +52,70 @@ export function ContactCta({
   showPhone?: boolean;
   centered?: boolean;
   onDark?: boolean;
+  /** Equal-height aligned cards for homepage referral grid. */
+  layout?: "default" | "grid-card";
   className?: string;
 }) {
   const { email, mailto, buttonLabel } = ctaConfig[kind];
+  const isGridCard = layout === "grid-card";
+
+  const rootClass = [
+    isGridCard ? "flex h-full flex-col" : "",
+    centered ? "text-center" : "",
+    className,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const headingClass = [
+    "heading-md leading-snug",
+    onDark ? "text-deep-foreground" : "",
+    isGridCard ? "min-h-[4.5rem] shrink-0 md:min-h-[5rem]" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const descriptionClass = [
+    "mt-3 leading-relaxed",
+    onDark ? "text-trust-muted" : "text-muted-foreground",
+    centered && !isGridCard ? "max-w-lg mx-auto" : "",
+    isGridCard ? "min-h-[6.75rem] flex-1" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
+  const emailClass = `font-semibold break-all transition-colors ${
+    onDark ? "text-deep-foreground hover:text-label-on-dark" : "text-deep hover:text-primary"
+  }`;
+
+  const buttonClass = isGridCard
+    ? "w-full justify-center min-h-[3.125rem] px-4 text-sm leading-snug text-center"
+    : "w-full sm:w-auto justify-center";
+
+  const actionsClass = [
+    "mt-6 flex gap-3",
+    isGridCard ? "shrink-0 flex-col" : "flex-col sm:flex-row flex-wrap",
+    centered && !isGridCard ? "sm:justify-center" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <div className={`${centered ? "text-center" : ""} ${className}`.trim()}>
-      <h2 className={`heading-md ${onDark ? "text-deep-foreground" : ""}`}>{heading}</h2>
-      <p
-        className={`mt-3 leading-relaxed ${onDark ? "text-trust-muted" : "text-muted-foreground"} ${centered ? "max-w-lg mx-auto" : ""}`}
-      >
-        {description}
-      </p>
-      <p className="mt-5">
-        <a
-          href={`mailto:${email}`}
-          className={`font-semibold break-all transition-colors ${
-            onDark ? "text-deep-foreground hover:text-label-on-dark" : "text-deep hover:text-primary"
-          }`}
-        >
+    <div className={rootClass}>
+      <h2 className={headingClass}>{heading}</h2>
+      <p className={descriptionClass}>{description}</p>
+      <p className="mt-5 shrink-0">
+        <a href={`mailto:${email}`} className={emailClass}>
           {email}
         </a>
       </p>
-      <div className={`mt-6 flex flex-col sm:flex-row flex-wrap gap-3 ${centered ? "sm:justify-center" : ""}`}>
-        <a href={mailto} className="btn-primary w-full sm:w-auto justify-center">
-          <Mail className="size-4" /> {buttonLabel}
+      <div className={actionsClass}>
+        <a href={mailto} className={`btn-primary ${buttonClass}`}>
+          <Mail className="size-4 shrink-0" /> {buttonLabel}
         </a>
         {showPhone && (
-          <a href={siteContact.phoneHref} className="btn-teal w-full sm:w-auto justify-center">
-            <Phone className="size-4" /> Call Us
+          <a href={siteContact.phoneHref} className={`btn-teal ${buttonClass}`}>
+            <Phone className="size-4 shrink-0" /> Call Us
           </a>
         )}
       </div>

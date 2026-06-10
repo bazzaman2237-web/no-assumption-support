@@ -356,15 +356,16 @@ function FormsCta() {
           subtitle="Referrals, careers, and feedback — email or call us directly."
           animate
         />
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div className="grid gap-6 md:grid-cols-3 md:items-stretch max-w-5xl mx-auto">
           {cards.map((card, i) => (
-            <RevealItem key={card.kind} delayMs={100 + i * 100}>
-              <div className="card-elevated p-6 md:p-7 h-full">
+            <RevealItem key={card.kind} delayMs={100 + i * 100} className="h-full">
+              <div className="card-elevated flex h-full flex-col p-6 md:p-7">
                 <ContactCta
                   kind={card.kind}
                   heading={card.heading}
                   description={card.description}
                   showPhone={card.showPhone}
+                  layout="grid-card"
                 />
               </div>
             </RevealItem>
