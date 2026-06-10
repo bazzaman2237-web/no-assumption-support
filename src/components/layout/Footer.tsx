@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Facebook, Linkedin } from "lucide-react";
 import type { ReactNode } from "react";
 import { AustraliaAboriginalFlags } from "@/components/AustraliaAboriginalFlags";
 import { images, siteContact, acknowledgementText, missionStatement } from "@/data/site";
@@ -168,6 +168,28 @@ export function Footer() {
                     >
                       <MessageCircle className="size-4 text-primary shrink-0" aria-hidden="true" />
                       WhatsApp
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={siteContact.facebook}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2.5 hover:text-primary hover:underline"
+                    >
+                      <Facebook className="size-4 text-primary shrink-0" aria-hidden="true" />
+                      Facebook
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href={siteContact.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2.5 hover:text-primary hover:underline"
+                    >
+                      <Linkedin className="size-4 text-primary shrink-0" aria-hidden="true" />
+                      LinkedIn
                     </a>
                   </li>
                 </ul>

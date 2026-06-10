@@ -76,9 +76,9 @@ export function Nav() {
           <img
             src={images.logo}
             alt="No Assumption Support Service"
-            className="h-14 w-14 md:h-16 md:w-16 xl:h-20 xl:w-20 shrink-0 rounded-xl object-contain shadow-sm"
-            width={80}
-            height={80}
+            className="h-28 w-28 md:h-32 md:w-32 xl:h-40 xl:w-40 shrink-0 rounded-xl object-contain shadow-sm"
+            width={160}
+            height={160}
           />
           <span className="leading-tight hidden sm:block">
             <span className="block font-display text-lg xl:text-xl font-semibold text-deep">No Assumption</span>
