@@ -29,14 +29,14 @@ function AboutPage() {
       />
 
       <section className="section-white section-pad-sm">
-        <div className="container-page grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
+        <div className="container-page grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           <img
             src={images.about}
             alt="No Assumption support worker with a participant"
             loading="lazy"
             width={800}
             height={1290}
-            className="rounded-[2rem] w-full h-[460px] object-cover shadow-xl"
+            className="rounded-[2rem] w-full h-[280px] sm:h-[360px] lg:h-[460px] object-cover shadow-xl"
           />
           <div>
             <h2 className="font-display text-4xl font-semibold text-deep leading-tight">

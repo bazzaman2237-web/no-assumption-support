@@ -645,6 +645,25 @@
   }
 }
 
+@media (max-width: 639px) {
+  .commitment-collage {
+    min-height: 24rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .commitment-collage-apart {
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .apart-box-sway {
+    animation: none;
+    transform: none;
+  }
+}
+
 /* What Sets Us Apart — floating stats box (Paramount-style) */
 @keyframes apartBoxSway {
   0%,

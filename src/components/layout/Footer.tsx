@@ -56,9 +56,9 @@ export function Footer() {
               <img
                 src={images.logo}
                 alt="No Assumption Support Service logo"
-                className="size-14 shrink-0 rounded-xl object-contain shadow-sm"
-                width={56}
-                height={56}
+                className="size-16 shrink-0 rounded-xl object-contain shadow-sm"
+                width={64}
+                height={64}
               />
               <div className="leading-tight">
                 <p className="font-display text-xl font-semibold">No Assumption</p>
@@ -155,9 +155,11 @@ export function Footer() {
                       {siteContact.email}
                     </a>
                   </li>
-                  <li className="inline-flex items-start gap-2.5">
-                    <MapPin className="size-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
-                    <span>{siteContact.address}</span>
+                  <li>
+                    <span className="inline-flex items-start gap-2.5">
+                      <MapPin className="size-4 text-primary shrink-0 mt-0.5" aria-hidden="true" />
+                      <span>{siteContact.address}</span>
+                    </span>
                   </li>
                   <li>
                     <a

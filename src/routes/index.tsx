@@ -56,7 +56,7 @@ function HomePage() {
 }
 function Hero() {
   return (
-    <section className="section-hero-wrap pt-6 pb-10 md:pt-8 md:pb-12">
+    <section className="section-hero-wrap pt-8 pb-10 md:pt-10 md:pb-12">
       <div className="container-page">
         <div className="hero-panel relative overflow-hidden px-6 py-10 md:px-10 md:py-14 lg:px-14 lg:py-16">
           <div className="absolute -top-20 -right-16 w-72 h-72 rounded-full bg-hero-blob/80 blur-2xl pointer-events-none reveal-blob" />
@@ -92,11 +92,11 @@ function Hero() {
                 </p>
               </HeroRevealItem>
               <HeroRevealItem delayMs={240}>
-                <div className="mt-8 flex flex-wrap gap-3">
-                  <Link to="/contact" className="btn-primary">
+                <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
+                  <Link to="/contact" className="btn-primary w-full sm:w-auto justify-center">
                     Start a conversation <ArrowRight className="size-4" />
                   </Link>
-                  <Link to="/about-us" className="btn-teal">
+                  <Link to="/about-us" className="btn-teal w-full sm:w-auto justify-center">
                     About Us
                   </Link>
                 </div>
@@ -170,7 +170,7 @@ function TrustStrip() {
 }
 function Commitment() {
   return (
-    <RevealSection className="section-white section-pad overflow-hidden">
+    <RevealSection className="section-white section-pad-sm overflow-hidden">
       <div
         className="reveal-blob pointer-events-none absolute -right-24 top-1/4 h-72 w-72 rounded-full bg-primary/8 blur-3xl"
         aria-hidden="true"
@@ -180,7 +180,7 @@ function Commitment() {
         style={{ animationDelay: "-4s" }}
         aria-hidden="true"
       />
-      <div className="container-page relative grid lg:grid-cols-2 gap-10 lg:gap-14 xl:gap-16 items-center">
+      <div className="container-page relative grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-14 items-center">
         <div>
           <RevealItem delayMs={0}>
             <span className="section-label block">{homeCommitment.eyebrow}</span>

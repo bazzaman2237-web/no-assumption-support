@@ -73,12 +73,12 @@ export function ContactCta({
           {email}
         </a>
       </p>
-      <div className={`mt-6 flex flex-wrap gap-3 ${centered ? "justify-center" : ""}`}>
-        <a href={mailto} className="btn-primary">
+      <div className={`mt-6 flex flex-col sm:flex-row flex-wrap gap-3 ${centered ? "sm:justify-center" : ""}`}>
+        <a href={mailto} className="btn-primary w-full sm:w-auto justify-center">
           <Mail className="size-4" /> {buttonLabel}
         </a>
         {showPhone && (
-          <a href={siteContact.phoneHref} className="btn-teal">
+          <a href={siteContact.phoneHref} className="btn-teal w-full sm:w-auto justify-center">
             <Phone className="size-4" /> Call Us
           </a>
         )}

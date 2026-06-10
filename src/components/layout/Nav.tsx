@@ -71,14 +71,14 @@ export function Nav() {
 
   return (
     <header className="sticky top-0 z-50 bg-card/95 backdrop-blur-md border-b border-border shadow-[0_2px_20px_rgb(18_50_74/7%)]">
-      <div className="container-page flex items-center justify-between gap-4 py-3 md:py-3.5 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center xl:gap-6">
-        <Link to="/" className="flex items-center gap-3 min-w-0 shrink-0">
+      <div className="container-page flex items-center justify-between gap-3 py-2.5 md:py-3 xl:grid xl:grid-cols-[auto_1fr_auto] xl:items-center xl:gap-6">
+        <Link to="/" className="flex items-center gap-2.5 sm:gap-3 min-w-0 shrink-0">
           <img
             src={images.logo}
             alt="No Assumption Support Service"
-            className="h-28 w-28 md:h-32 md:w-32 xl:h-40 xl:w-40 shrink-0 rounded-xl object-contain shadow-sm"
-            width={160}
-            height={160}
+            className="h-16 w-16 md:h-20 md:w-20 xl:h-24 xl:w-24 shrink-0 rounded-xl object-contain shadow-sm"
+            width={96}
+            height={96}
           />
           <span className="leading-tight hidden sm:block">
             <span className="block font-display text-lg xl:text-xl font-semibold text-deep">No Assumption</span>
@@ -110,7 +110,7 @@ export function Nav() {
           <button
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"
-            className="xl:hidden inline-flex items-center justify-center size-10 rounded-md hover:bg-muted shrink-0"
+            className="xl:hidden inline-flex items-center justify-center size-11 rounded-md hover:bg-muted shrink-0"
           >
             {open ? <X className="size-6" /> : <Menu className="size-6" />}
           </button>
