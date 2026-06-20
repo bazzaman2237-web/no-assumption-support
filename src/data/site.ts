@@ -22,6 +22,7 @@ export const siteContact = {
     "https://www.facebook.com/NoAssumptionSupportService?mibextid=wwXIfr&rdid=e6TClQI7H8WWbjSz&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1ALWVfzYSt%2F%3Fmibextid%3DwwXIfr#",
   linkedin: "https://www.linkedin.com/in/jennifer-garley-pratt-7a8b7b3b6/",
   address: "Forrestfield, Perth WA 6058",
+  mailingAddress: "PO Box 136, Forrestfield, WA 6058",
   mapsHref: "https://maps.google.com/?q=Forrestfield+WA+6058",
   abn: "36 692 156 737",
   ndisStatus: "Registration in progress",
@@ -223,7 +224,7 @@ export const teamMembers = [
   },
   {
     name: "Lisa Gullo",
-    role: "Support Co-ordinator",
+    role: "Care Support Coordinator",
     image: "/images/team/team-lisa-gullo.png",
   },
 ] as const;

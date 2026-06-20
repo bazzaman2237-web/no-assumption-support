@@ -392,7 +392,13 @@ function ContactSection() {
               { icon: Phone, label: "Phone", value: siteContact.phone, href: siteContact.phoneHref },
               { icon: Mail, label: "Email", value: siteContact.email, href: `mailto:${siteContact.email}` },
               { icon: Mail, label: "Feedback", value: siteContact.feedbackEmail, href: `mailto:${siteContact.feedbackEmail}` },
-              { icon: MapPin, label: "Location", value: siteContact.address, href: siteContact.mapsHref },
+              {
+                icon: MapPin,
+                label: "Location",
+                value: siteContact.address,
+                href: siteContact.mapsHref,
+                mailingAddress: siteContact.mailingAddress,
+              },
             ].map((c, i) => (
               <RevealItem key={c.label} delayMs={i * 100}>
                 <a
@@ -407,6 +413,14 @@ function ContactSection() {
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">{c.label}</p>
                     <p className="font-semibold text-deep">{c.value}</p>
+                    {"mailingAddress" in c && c.mailingAddress && (
+                      <div className="mt-3">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                          Mailing address
+                        </p>
+                        <p className="font-semibold text-deep">{c.mailingAddress}</p>
+                      </div>
+                    )}
                   </div>
                 </a>
               </RevealItem>

@@ -52,6 +52,7 @@ function ContactPage() {
                 label: "Address",
                 value: siteContact.address,
                 href: siteContact.mapsHref,
+                mailingAddress: siteContact.mailingAddress,
               },
               {
                 icon: Clock,
@@ -70,6 +71,14 @@ function ContactPage() {
                       {c.label}
                     </p>
                     <p className="font-display text-lg font-semibold text-deep">{c.value}</p>
+                    {"mailingAddress" in c && c.mailingAddress && (
+                      <div className="mt-3">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
+                          Mailing address
+                        </p>
+                        <p className="font-display text-lg font-semibold text-deep">{c.mailingAddress}</p>
+                      </div>
+                    )}
                   </div>
                 </>
               );
