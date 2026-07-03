@@ -38,7 +38,17 @@ export function FaqAccordion({ faqs, defaultOpen = 0 }: { faqs: FaqItem[]; defau
               hidden={!isOpen}
               className={isOpen ? "px-6 pb-6 text-muted-foreground leading-relaxed" : undefined}
             >
-              {isOpen && f.a}
+              {isOpen && (
+                typeof f.a === "string" && f.a.includes("\n\n") ? (
+                  f.a.split(/\n\n+/).map((paragraph, j) => (
+                    <p key={j} className={j > 0 ? "mt-3" : undefined}>
+                      {paragraph}
+                    </p>
+                  ))
+                ) : (
+                  f.a
+                )
+              )}
             </div>
           </li>
         );

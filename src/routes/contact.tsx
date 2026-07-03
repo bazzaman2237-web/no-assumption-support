@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
+import { Phone, Mail, MapPin, MessageCircle, Clock, Info } from "lucide-react";
 import { ContactCta } from "@/components/ContactCta";
 import { PageHero } from "@/components/PageHero";
 import { siteContact } from "@/data/site";
@@ -20,7 +20,19 @@ function ContactPage() {
       />
 
       <section className="section-teal section-pad-sm">
-        <div className="container-page grid lg:grid-cols-5 gap-8">
+        <div className="container-page space-y-6">
+          <div className="flex items-start gap-4 rounded-2xl border border-border bg-warm p-6 md:p-8">
+            <div className="grid place-items-center size-12 rounded-2xl bg-secondary text-primary shrink-0">
+              <Info className="size-6" aria-hidden="true" />
+            </div>
+            <p className="text-muted-foreground leading-relaxed">
+              NDIS-managed participants are welcome to contact us with enquiries about our NDIS registration
+              progress. We're happy to answer your questions, discuss your support needs, and keep you updated on
+              our registration status.
+            </p>
+          </div>
+
+          <div className="grid lg:grid-cols-5 gap-8">
           <div className="lg:col-span-2 space-y-4">
             {[
               {
@@ -131,6 +143,7 @@ function ContactPage() {
                 showPhone
               />
             </div>
+          </div>
           </div>
         </div>
       </section>
