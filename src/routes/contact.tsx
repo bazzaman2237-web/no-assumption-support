@@ -26,9 +26,8 @@ function ContactPage() {
               <Info className="size-6" aria-hidden="true" />
             </div>
             <p className="text-muted-foreground leading-relaxed">
-              NDIS-managed participants are welcome to contact us with enquiries about our NDIS registration
-              progress. We're happy to answer your questions, discuss your support needs, and keep you updated on
-              our registration status.
+              NDIS-managed participants are welcome to contact us. We are NDIS registered and happy to answer
+              your questions and discuss your support needs.
             </p>
           </div>
 

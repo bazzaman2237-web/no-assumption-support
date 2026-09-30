@@ -7,7 +7,7 @@ const WEBSITE_ID = `${SITE_URL}/#website`;
 
 /**
  * Site-wide JSON-LD for No Assumption Support Service.
- * Does not claim NDIS registration — registration is in progress.
+ * NDIS registered.
  */
 export function getStructuredDataGraph() {
   return {

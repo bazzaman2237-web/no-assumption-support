@@ -18,7 +18,7 @@ const faqs = [
   },
   {
     q: "How does No Assumption Support Service meet these standards?",
-    a: "We review our practices against the NDIS Practice Standards — including staff training, incident management, transparent complaint resolution, and continuous improvement. Our NDIS registration is currently in progress with the Commission; we welcome enquiries while finalisation is underway.",
+    a: "We review our practices against the NDIS Practice Standards — including staff training, incident management, transparent complaint resolution, and continuous improvement. We are NDIS registered; we welcome enquiries.",
   },
   {
     q: "What are my rights as an NDIS participant?",

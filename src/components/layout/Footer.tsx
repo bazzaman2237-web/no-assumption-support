@@ -206,7 +206,7 @@ export function Footer() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-xs sm:text-sm text-deep-foreground/75">
             <p>© {new Date().getFullYear()} No Assumption Support Service. All rights reserved.</p>
             <p className="sm:text-right">
-              ABN: {siteContact.abn} · NDIS: {siteContact.ndisStatus}
+              ABN: {siteContact.abn} · {siteContact.ndisStatus}
             </p>
           </div>
         </div>

@@ -25,7 +25,7 @@ export const siteContact = {
   mailingAddress: "PO Box 136, Forrestfield, WA 6058",
   mapsHref: "https://maps.google.com/?q=Forrestfield+WA+6058",
   abn: "36 692 156 737",
-  ndisStatus: "Registration in progress",
+  ndisStatus: "NDIS registered",
   hours: "Monday – Sunday: available by appointment",
 } as const;
 

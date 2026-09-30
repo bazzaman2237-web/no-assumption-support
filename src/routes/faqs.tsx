@@ -14,15 +14,15 @@ const suburbList = [...serviceArea.serviceSuburbs, "and surrounds"].join(", ");
 const faqs = [
   {
     q: "What is your NDIS registration status?",
-    a: `Our NDIS registration is currently in progress with the NDIS Quality and Safeguards Commission. We welcome enquiries and can discuss support options while registration is being finalised. Call us on ${siteContact.phone} to learn more.`,
+    a: `No Assumption Support Service is NDIS registered. We welcome enquiries and can discuss support options. Call us on ${siteContact.phone} to learn more.`,
   },
   {
     q: "I'm NDIS-managed — can I still contact you?",
-    a: `No Assumption Support Service is not yet a registered NDIS provider. Our registration with the NDIS Quality and Safeguards Commission is currently in progress.
+    a: `No Assumption Support Service is NDIS registered.
 
-If your plan is NDIS-managed, also called agency-managed, funded supports can generally only be delivered by registered providers, so we may not be able to commence funded services until registration is finalised.
+If your plan is NDIS-managed, also called agency-managed, funded supports can generally only be delivered by registered providers.
 
-You're still welcome to contact us with questions about our registration progress, your support needs, and how we can keep you updated. We currently support self-managed and plan-managed participants, and we're happy to discuss what may be possible for you in the meantime.`,
+You're welcome to contact us with questions about your support needs. We currently support self-managed, plan-managed, and NDIS-managed participants, and we're happy to discuss what may be possible for you.`,
   },
   {
     q: "Which suburbs do you service?",
@@ -58,7 +58,7 @@ You're still welcome to contact us with questions about our registration progres
   },
   {
     q: "Do you work with self-managed and plan-managed participants?",
-    a: "Yes — we currently support self-managed and plan-managed NDIS participants. We can provide services and issue invoices in line with your plan management type, and help you understand billing and claims processing. NDIS-managed (agency-managed) plans work differently: funded supports generally require a registered provider, and we are not yet registered. If that is your plan type, you are still welcome to contact us — see our question about NDIS-managed participants above.",
+    a: "Yes — we currently support self-managed, plan-managed, and NDIS-managed participants. We can provide services and issue invoices in line with your plan management type, and help you understand billing and claims processing. NDIS-managed (agency-managed) plans generally require a registered provider, and we are NDIS registered. If that is your plan type, you are welcome to contact us — see our question about NDIS-managed participants above.",
   },
   {
     q: "How do we get started?",
